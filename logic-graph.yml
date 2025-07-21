@@ -17,6 +17,10 @@ nodes:
     description: "Lean project that formalizes the core mathematical claims."
     value: .
 
+  - id: GrowthPlot
+    type: artifact
+    value: viz/growth_curves.png
+
 edges:
   - from: Article
     to: PythonCalc
@@ -27,3 +31,9 @@ edges:
   - from: Article
     to: LeanProject
     obligation: bh_lean_proof_check 
+  - from: PythonCalc
+    to: GrowthPlot
+    obligation: growth_curve_png_check
+  - from: Article
+    to: GrowthPlot
+    obligation: growth_curve_png_check 

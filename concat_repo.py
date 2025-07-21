@@ -45,7 +45,7 @@ def iter_files():
     # Файлы по явному списку
     for fname in INCLUDE_PATHS:
         path = Path(fname)
-        if path.exists() and path.is_file():
+        if path.exists() and path.is_file() and not str(path).endswith('.png'):
             yield path
     # Файлы по директориям и расширениям
     for dname, ext in INCLUDE_DIRS:
