@@ -82,6 +82,10 @@ meaning: “if erase cost `c` is non-zero, the profit-maximising multiplier is `
 
 ## 3 Time-to-Singularity Calculation
 
+![Informational Singularity Timeline](viz/growth_curves.png)
+
+*Figure: Timeline to the informational singularity for different growth scenarios. The intersection points show the year when the Bekenstein bound is reached for each scenario. Colors and labels correspond to the legend. Generated automatically from the model's parameters.*
+
 Let
 * `N₀ = 1.448 × 10²⁴ bit`  (≈ 181 ZB, IDC 2025)
 * `N_max = 1.74 × 10⁶⁴ bit`  (surface of a 1 mm BH)
