@@ -6,10 +6,11 @@ noncomputable section
 /-- Символ золотого сечения (φ). -/
 def phi : ℝ := (1 + Real.sqrt 5) / 2
 
-/-- Аксима: рациональный бизнес + ненулевая стоимость стирания ⇒ оптимальная стратегия роста без стирания,
-     соответствующая экспоненциальному коэффициенту φ (≈1.618).  -/
-axiom AI_optimal (c : ℝ) (hc : 0 < c) :
-  ∃ r : ℝ, r = phi
+/-- *Existence* lemma (placeholder): given any positive erase cost `c`, there **exists** a growth rate
+    `r` equal to `φ`.  This removes the unchecked axiom and keeps the theory consistent; a full
+    economic proof of optimality would refine this statement further. -/
+lemma AI_optimal (c : ℝ) (hc : 0 < c) : ∃ r : ℝ, r = phi := by
+  exact ⟨phi, rfl⟩
 
 /-- Основной тезис: пусть `N0>0`, `Nmax>N0`, `r>1`. Тогда существует время `t` такое, что
     `N0 * r^t = Nmax`. (Неформально: экспоненциальный рост без стирания неизбежно достигает предела.) -/
