@@ -37,7 +37,7 @@ for idx, (name, r) in enumerate(scenarios.items()):
                 color=color,
                 arrowprops=dict(arrowstyle="->", color=color, lw=1.5),
                 ha='left', va='bottom',
-                bbox=dict(boxstyle="round,pad=0.2", fc="white", ec=color, lw=1, alpha=0.8))
+                bbox=dict(boxstyle="round,pad=0.2", fc="white", ec=color, lw=1, alpha=0.0))
 
 # Formatting
 ax.axhline(N_max, color='red', linestyle='--', label='Bekenstein Bound (N_max)', linewidth=2)
@@ -50,5 +50,5 @@ ax.grid(True, which="both", ls="-", color='#e0e0e0', alpha=0.7)
 fig.tight_layout()
 
 # Save with white background
-plt.savefig('growth_curves.png', transparent=False, bbox_inches='tight')
-print("Plot saved to growth_curves.png") 
+plt.savefig('viz/growth_curves.png', transparent=False, bbox_inches='tight')
+print("Plot saved to viz/growth_curves.png") 
