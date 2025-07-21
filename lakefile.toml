@@ -1,0 +1,9 @@
+name = "LeanBh"
+version = "0.1.0"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+
+[[lean_lib]]
+name = "LeanBh"

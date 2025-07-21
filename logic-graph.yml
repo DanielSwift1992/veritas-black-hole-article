@@ -1,0 +1,29 @@
+schema: 1
+plugins:
+  - plugins.bh_veritas_plugins
+nodes:
+  - id: Article
+    type: artifact
+    description: "The main article in Markdown."
+    value: article_blackhole_inevitable_en.md
+
+  - id: PythonCalc
+    type: artifact
+    description: "Python script that calculates the singularity timeline."
+    value: scripts
+
+  - id: LeanProject
+    type: artifact
+    description: "Lean project that formalizes the core mathematical claims."
+    value: .
+
+edges:
+  - from: Article
+    to: PythonCalc
+    obligation: bh_python_timeline_check
+    meta:
+      expected_years: 191
+
+  - from: Article
+    to: LeanProject
+    obligation: bh_lean_proof_check 
