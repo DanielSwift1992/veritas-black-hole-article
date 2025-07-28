@@ -120,15 +120,9 @@ class LeanProofCheck(BaseCheck):
             if grep_admit.stdout:
                 return CheckResult.failed(f"Found 'admit' in proof(s):\n{grep_admit.stdout}")
             if grep_axiom.stdout:
-                lines = [ln for ln in grep_axiom.stdout.strip().split("\n") if ln.strip()]
-                unexpected = [ln for ln in lines if "AI_optimal" not in ln]
-                if unexpected:
-                    return CheckResult.failed(
-                        "Unapproved axiom declaration(s) found:\n" + "\n".join(unexpected)
-                    )
-                else:
-                    # Allowed modelling axiom present; treat as warning but pass.
-                    print("[INFO] Allowed modelling axiom AI_optimal detected.")
+                return CheckResult.failed(
+                    "Axiom declaration(s) found (proof must be axioms-free):\n" + grep_axiom.stdout
+                )
             build_process = subprocess.run(
                 ["lake", "build"],
                 cwd=str(artifact),
@@ -174,6 +168,7 @@ class ArticleTableCheck(BaseCheck):
         "Larger BH": ((1 + 5 ** 0.5) / 2, 100),  # 1 cm → N_max ×100
         "Partial deletion allowed": (1.50, 1),
         "Massive expansion": ((1 + 5 ** 0.5) / 2, 1e10),
+        "Doppler recalibration": ((1 + 5 ** 0.5) / 2, 2),
     }
 
     def _calc_years(self, r: float, n_factor: float = 1) -> tuple[int, int]:

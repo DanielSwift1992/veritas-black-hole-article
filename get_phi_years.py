@@ -18,6 +18,7 @@ SCENARIOS: Dict[str, Tuple[float, float]] = {
     "Larger BH": ((1 + math.sqrt(5)) / 2, 100),  # 1 cm radius → N_max ×100
     "Partial deletion allowed": (1.50, 1),
     "Massive expansion": ((1 + math.sqrt(5)) / 2, 1e10),
+    "Doppler recalibration": ((1 + math.sqrt(5)) / 2, 2),
 }
 
 # Physical constant for communication energy (Landauer):

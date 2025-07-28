@@ -27,9 +27,6 @@ noncomputable section
 -- Golden ratio φ
 def phi : ℝ := (1 + Real.sqrt 5) / 2
 
--- Modelling axiom: positive erase cost implies existence of growth rate r = φ
-axiom AI_optimal (c : ℝ) (hc : 0 < c) : ∃ r : ℝ, r = phi
-
 -- For N0 > 0, Nmax > N0, and r > 1, there exists t with N0 * r^t = Nmax
 lemma time_to_threshold {N0 Nmax r : ℝ}
     (hN0 : 0 < N0) (hNmax : N0 < Nmax) (hr : 1 < r) :
