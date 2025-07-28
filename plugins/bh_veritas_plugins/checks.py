@@ -139,18 +139,7 @@ class LeanProofCheck(BaseCheck):
         except Exception as e:
             return CheckResult.failed(f"An unexpected error occurred: {e}")
 
-@plugin("growth_curve_png_check")
-class GrowthCurvePngCheck(BaseCheck):
-    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
-        # Resolve repo root as two levels up from this file (plugins/…/checks.py)
-        repo_root = pathlib.Path(__file__).resolve().parents[2]
-        plot_py = repo_root / "viz/generate_plot.py"
-        data_py = repo_root / "get_phi_years.py"
-        if not artifact.exists():
-            return CheckResult.failed(f"PNG not found: {artifact}")
-        # If PNG is present we consider it acceptable; build systems often touch files without
-        # updating mtime monotonicity across platforms, so we skip strict timestamp checks.
-        return CheckResult.passed("Growth curve PNG is present (timestamp check skipped).")
+# Remove bespoke implementation; reuse generic factory below.
 
 
 # Generic PNG freshness checker factory
@@ -172,6 +161,7 @@ def _png_check(name: str, png_path: str, script_path: str):
 # Register two more PNG checks
 _png_check("robust_png_check", "viz/robust_recal.png", "viz/robust_plot.py")
 _png_check("droplet_png_check", "viz/info_droplet.png", "viz/info_droplet.py")
+_png_check("growth_curve_png_check", "viz/growth_curves.png", "viz/generate_plot.py")
 
 @plugin("article_table_check")
 class ArticleTableCheck(BaseCheck):
