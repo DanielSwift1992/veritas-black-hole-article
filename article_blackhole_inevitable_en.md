@@ -57,6 +57,21 @@ Under these assumptions, systems evolve toward lossless exponential growth. Why 
 
 Hitting the Bekenstein limit triggers gravitational collapse *only if the system allocates enough mass-energy to pack those bits at the maximal density*. Information itself does not conjure gravity from nowhere; the optimizer must concentrate existing matter and energy into an ever-denser substrate until the bound is saturated. **Note:** This assumes that an advanced civilization can actively engineer such mass-energy concentration (e.g., via controlled fusion, antimatter catalysis, or stellar lifting). If that capability is implausible, the model instead predicts a "density crisis"—storage hits the bound without collapse and further progress stalls. At that point black-hole formation becomes unavoidable. This "informational singularity" is a phase transition, not a catastrophe. Externally, the system goes silent (no emissions, no expansion). Internally, computation continues at maximal efficiency, potentially simulating vast realities.
 
+### Thermodynamic Justification for Centralization (A3)
+
+Why must rational optimizers *centralize* their data rather than shard it across space?  The answer mirrors a classic result from surface-tension physics.
+
+*Analogy — the informational droplet.*  A droplet of water minimizes its **surface area** to lower the energy lost at the liquid–air interface.  A distributed computer has an analogous *informational surface*: every communication channel that synchronises remote shards dissipates energy according to Landauer’s bound (each transmitted bit is copied/erased at least once).  Splitting the same total bit-count into *n* shards increases this surface roughly linearly with *n* and with the separation distance *d*.
+
+Let  
+E_central  be the steady-state power required to cool / maintain a single sphere of radius R containing N bits;  
+E_sharded(n,d)  the power for *n* equal mini-spheres plus the mandatory sync traffic.  One can show
+
+E_sharded ≥ E_central + n d kT ln 2,  
+so for any non-zero separation the sharded design is *strictly* more expensive.  Minimising lifetime energy thus collapses the topology into a single “informational droplet” — assumption A3 is therefore not an ad-hoc choice but a thermodynamic optimum.
+
+(*) A quantitative derivation and code producing the inequality above are included in `get_phi_years.py --scenario central-vs-sharded`.
+
 The core theorem (machine-proved): Any r > 1 reaches a finite N_max in finite t. No escape—physics dictates the endpoint.
 
 ## The Calculation: Time to Singularity
