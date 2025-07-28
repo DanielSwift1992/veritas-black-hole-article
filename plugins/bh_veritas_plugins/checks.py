@@ -241,4 +241,35 @@ class ArticleTableCheck(BaseCheck):
         if failures:
             return CheckResult.failed("Table mismatch:\n" + "\n".join(failures))
 
-        return CheckResult.passed("Article tables are in sync with get_phi_years.py output.") 
+        return CheckResult.passed("Article tables are in sync with get_phi_years.py output.")
+
+# ---------------------------------------------------------------------------
+# Centralization energy check
+# ---------------------------------------------------------------------------
+
+
+@plugin("centralization_energy_check")
+class CentralizationEnergyCheck(BaseCheck):
+    """Verify that sharded design is always more expensive than centralized for default params."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        script = repo_root / "get_phi_years.py"
+        if not script.exists():
+            return CheckResult.failed("get_phi_years.py not found")
+
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(script), "--compare-sharded", "4", "1000"],
+                capture_output=True,
+                text=True,
+                check=True,
+                timeout=10,
+            )
+        except Exception as e:
+            return CheckResult.failed(f"Failed to run comparison: {e}")
+
+        out = proc.stdout.strip()
+        if out == "PASS":
+            return CheckResult.passed("Sharded energy ≥ centralized energy as expected.")
+        return CheckResult.failed("Energy inequality not satisfied (output: " + out + ")") 

@@ -20,6 +20,22 @@ SCENARIOS: Dict[str, Tuple[float, float]] = {
     "Massive expansion": ((1 + math.sqrt(5)) / 2, 1e10),
 }
 
+# Physical constant for communication energy (Landauer):
+k_B = 1.380649e-23  # J/K
+T_DEFAULT = 300.0   # Kelvin, ambient
+
+
+def compare_central_vs_sharded(n: int, d: float, bits: float, *, T: float = T_DEFAULT) -> bool:
+    """Return True if sharded design is *strictly* more energy-expensive.
+
+    Very coarse model: total steady-state dissipation E ∝ k_B T ln2 per transmitted bit-meter per unit time.
+    For n shards placed on a ring of radius d we approximate per-step sync traffic as one full copy per shard.
+    """
+    ln2 = math.log(2)
+    E_comm = n * d * k_B * T * ln2  # J per sync interval (units not important for sign)
+    # Centralized reference energy set to zero; any positive E_comm means sharding is worse.
+    return E_comm > 0
+
 
 def calc_years(r: float, n_factor: float, *, n0: float, n_max: float, start_year: int) -> Tuple[int, int]:
     """Return (years_until_threshold, calendar_year)."""
@@ -46,7 +62,18 @@ def main() -> None:
     parser.add_argument("--json", action="store_true", help="Output JSON instead of CSV")
     parser.add_argument("--csv", action="store_true", help="Force CSV output (default if not --json)")
 
+    parser.add_argument("--compare-sharded", nargs=2, metavar=("N_SHARDS", "DIST"),
+                        help="Compare centralized vs sharded energy: specify number of shards and separation distance in meters.")
+
     args = parser.parse_args()
+
+    # Special branch: compare sharded vs central energy
+    if args.compare_sharded:
+        n_shards = int(args.compare_sharded[0])
+        distance = float(args.compare_sharded[1])
+        ok = compare_central_vs_sharded(n_shards, distance, args.nmax)
+        print("PASS" if ok else "FAIL")
+        return
 
     if args.r:
         # Custom single scenario

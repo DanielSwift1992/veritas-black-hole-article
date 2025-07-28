@@ -48,4 +48,9 @@ edges:
   # Verify that all quantitative and sensitivity tables match code
   - from: Article
     to: SensitivityCheck
-    obligation: article_table_check 
+    obligation: article_table_check
+
+  # Centralization energy inequality
+  - from: Article
+    to: PythonCalc
+    obligation: centralization_energy_check 
