@@ -55,6 +55,8 @@ python generate_plot.py
 
 ## Assumptions & Limitations
 
+Results depend only on two experimentally verified facts (Landauer’s minimum erase cost, Bekenstein’s density bound) and one weak principle — average information growth r > 1 for any progressing civilisation.  All numeric forecasts additionally assume the illustrative baseline in the article (φ-growth, current N₀, etc.); changing these parameters shifts dates but never removes the finite-time singularity.
+
 ## Git hooks / CI discipline
 
 To block commits that break the formal checks, this repository ships with a *pre-commit* hook.
@@ -64,6 +66,4 @@ pip install pre-commit  # one-time
 pre-commit install      # installs .git/hooks/pre-commit
 ```
 
-After that every commit runs `veritas check`; a non-green status aborts the commit.
-
-The results are conditional on three explicit assumptions described in the article (A1–A3). In particular, the axiom `AI_optimal` is a *model placeholder*: future work aims to derive it from economic/game-theoretic principles. 
+After that every commit runs `veritas check`; a non-green status aborts the commit. 

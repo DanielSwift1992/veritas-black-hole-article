@@ -44,13 +44,13 @@ These facts are non-negotiable constraints on any physical system handling infor
 
 The model relies on three clear assumptions, each rooted in rationality and physics. They transform static limits into a dynamic forecast. If any assumption fails, the timeline shifts—but the finiteness remains.
 
-**A1: Positive Erase-Cost Bias**. The deletion cost (ΔE = kT ln 2 > 0) is irreducible and positive, while storage density improves exponentially, making retention cheaper over time. Any optimizer—AI-driven or otherwise—will bias toward "keep all" to avoid perpetual energy drain. Concrete scaling: For 10^{64} bits, deletion equates to 2 × 10^{36} USD in energy (2025 equivalents), vastly exceeding global output, whereas storage costs halve periodically under technological trends.
+**A1: Positive Erase-Cost Bias**. The deletion cost (ΔE = kT ln 2 > 0) is irreducible and positive, while storage density improves exponentially, making retention cheaper over time. Any optimizer—AI-driven or otherwise—will bias toward “keep all” to avoid perpetual energy drain. Even with optimistic future energy prices the total erase energy for ~10⁶⁴ bits dwarfs any plausible civilisation-scale production, while storage costs fall over time.
 
 **A2: Loss-Free Growth (Minimal Reversible Model)**.  As a *baseline* we encode data as a 2-register recurrence D_{n+1}=a D_n+b D_{n-1} (a,b ≥ 1).  For a=b=1 the characteristic rate is the golden ratio φ≈1.618; any reversible process with the same resource class grows at least as fast (φ-Minimality Lemma).  Other reversible schemes (e.g., k-order append, constant-rate concatenation) map to higher effective *r* and therefore shorten the timeline — users can experiment via the provided CLI (`--r` flag).
 
 **A3: Data Centralization**. Information remains gravitationally bound locally due to prohibitive latency and consistency costs in distributed systems (e.g., light-speed delays across stellar distances). Expansion or sharding would incur duplication/deletion penalties under A1, making it irrational.
 
-These are explicitly axiomatic in the Lean proofs (e.g., AI_optimal axiom ties non-zero erase cost to r=φ). Debate them freely—the code adjusts.
+These assumptions drive the illustrative forecasts; they are *not* required for the core theorem (which proves finiteness for any r > 1 without additional axioms).
 
 ## The Mechanism: From Growth to Singularity
 
@@ -105,7 +105,7 @@ Counterarguments addressed: If deletion is tolerated (relax A1), growth slows, b
 All mathematics is formally verified in Lean4 (mathlib4 dependency; no 'sorry' placeholders):
 - **φ-Minimality Lemma** (PhiMinimal.lean): Proves r ≥ φ for all qualifying recurrences, with equality iff a=b=1.
 - **Time-to-Threshold Lemma** (BlackHole.lean): Exists t such that N_0 * exp(t * log r) = N_max for r>1.
-- Assumptions as axioms (e.g., AI_optimal ties c>0 to r=φ).
+
 
 Run verification: `lake build` (project in repo; builds clean).
 
