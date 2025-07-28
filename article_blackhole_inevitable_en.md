@@ -23,7 +23,10 @@ This crosses finite thresholds, collapsing into black holes: active internally, 
 The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Python verification: Exact computation confirms 2217 (2025 + ceil(191.8)).
 
 ![Informational Singularity Timeline](viz/growth_curves.png)  
-*Figure: Exponential growth curves (log scale) intersecting the Bekenstein bound. φ-curve hits at 2217; others labeled. Generated from model parameters. [Alt: Log y-axis (bits) vs. years; horizontal bound line; colored trajectories with intersection points.]*
+*Figure 1: Exponential growth curves (log scale) intersecting the Bekenstein bound. φ-curve hits at 2217; others labeled.*
+
+![Robustness to Boundary Rescaling](viz/robust_recal.png)  
+*Figure 2: Doubling the bound (orange) shifts the intersection rightward by ~1.4 years, preserving finiteness.*
 
 ---
 
@@ -67,6 +70,9 @@ E_sharded(n,d)  the power for *n* equal mini-spheres plus the mandatory sync tra
 
 E_sharded ≥ E_central + n d kT ln 2,  
 so for any non-zero separation the sharded design is *strictly* more expensive.  Minimising lifetime energy thus collapses the topology into a single “informational droplet” — assumption A3 is therefore not an ad-hoc choice but a thermodynamic optimum.
+
+![Informational Droplet Analogy](viz/info_droplet.png)  
+*Figure 3: Left — three small shards with larger cumulative “informational surface”; right — one centralized droplet with minimal surface.*
 
 (*) A quantitative derivation and code producing the inequality above are included in `get_phi_years.py --scenario central-vs-sharded`.
 

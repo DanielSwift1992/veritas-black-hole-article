@@ -11,6 +11,8 @@ setup(
             'growth_curve_png_check = plugins.bh_veritas_plugins.checks:GrowthCurvePngCheck',
             'article_table_check = plugins.bh_veritas_plugins.checks:ArticleTableCheck',
             'centralization_energy_check = plugins.bh_veritas_plugins.checks:CentralizationEnergyCheck',
+            'robust_png_check = plugins.bh_veritas_plugins.checks:robust_png_check',
+            'droplet_png_check = plugins.bh_veritas_plugins.checks:droplet_png_check',
         ],
     },
 ) 

@@ -152,6 +152,27 @@ class GrowthCurvePngCheck(BaseCheck):
         # updating mtime monotonicity across platforms, so we skip strict timestamp checks.
         return CheckResult.passed("Growth curve PNG is present (timestamp check skipped).")
 
+
+# Generic PNG freshness checker factory
+def _png_check(name: str, png_path: str, script_path: str):
+    @plugin(name)
+    class _Check(BaseCheck):
+        def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+            repo_root = pathlib.Path(__file__).resolve().parents[2]
+            png = repo_root / png_path
+            script = repo_root / script_path
+            if not png.exists():
+                return CheckResult.failed(f"PNG not found: {png}")
+            if png.stat().st_mtime < script.stat().st_mtime:
+                return CheckResult.failed(f"PNG older than {script_path}, regenerate.")
+            return CheckResult.passed(f"{png_path} is up-to-date")
+
+    return _Check
+
+# Register two more PNG checks
+_png_check("robust_png_check", "viz/robust_recal.png", "viz/robust_plot.py")
+_png_check("droplet_png_check", "viz/info_droplet.png", "viz/info_droplet.py")
+
 @plugin("article_table_check")
 class ArticleTableCheck(BaseCheck):
     """Verify that the numeric values in the Markdown table match model calculations."""

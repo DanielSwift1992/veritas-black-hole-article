@@ -21,6 +21,14 @@ nodes:
     type: artifact
     value: viz/growth_curves.png
 
+  - id: RobustPlot
+    type: artifact
+    value: viz/robust_recal.png
+
+  - id: DropletPlot
+    type: artifact
+    value: viz/info_droplet.png
+
   # New node: table and sensitivity verification
   - id: SensitivityCheck
     type: artifact
@@ -44,6 +52,14 @@ edges:
   - from: Article
     to: GrowthPlot
     obligation: growth_curve_png_check
+
+  - from: Article
+    to: RobustPlot
+    obligation: robust_png_check
+
+  - from: Article
+    to: DropletPlot
+    obligation: droplet_png_check
 
   # Verify that all quantitative and sensitivity tables match code
   - from: Article
