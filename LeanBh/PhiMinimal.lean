@@ -1,3 +1,12 @@
+/-!
+  # Context & Disclaimer
+  This file proves the φ-minimality lemma under abstract recurrence assumptions.
+  It should be read in conjunction with the article and `BlackHole.lean`.
+  All results depend on modelling assumptions A1–A3; no claims are made about
+  their empirical inevitability.  Physical or economic validation is left to
+  future work.
+-/
+
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Tactic
 

@@ -19,7 +19,7 @@ This crosses finite thresholds, collapsing into black holes: active internally, 
 | Scenario | Growth Rate (r) | Time to Singularity (years) | Projected Year |
 |----------|-----------------|-----------------------------|----------------|
 | Conservative (23% annual) | 1.23 | 446 | 2471 |
-| Big-Data (40% annual) | 1.40 | 274 | 2299 |
+| Big-Data (40% annual) | 1.40 | 275 | 2300 |
 | φ Baseline (Minimal Lossless) | 1.618 | 192 | 2217 |
 
 The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Python verification: Exact computation confirms 2217 (2025 + ceil(191.8)).
@@ -33,9 +33,9 @@ The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Pytho
 
 1. **Landauer's Principle**: Erasing one bit requires ≥ kT ln 2 energy. Verified experimentally (IBM 2012, Nature 2018). Implication: Deletion is a fixed tax that scales poorly at civilization levels.
 
-2. **Bekenstein Bound**: Maximum bits in a region is proportional to its area and energy, saturated by black holes. For a 1 mm black hole: ~1.74 × 10^{64} bits, derived from black hole thermodynamics (Bekenstein, 1973).<grok:render card_id="658e92" card_type="citation_card" type="render_inline_citation">
-<argument name="citation_id">5</argument>
-</grok:render> This limit is universal, stemming from quantum gravity and entropy bounds.
+2. **Bekenstein Bound**: Maximum bits in a region scale with the *surface area* of the container and are saturated by black holes.  Choosing a reference Schwarzschild radius rₛ = 1 mm gives N_max ≈ 1.74 × 10⁶⁴ bits[^scale].
+
+[^scale]: N_max ∝ rₛ².  Replace *1 mm* with any radius to rescale the bound; the timeline shifts by ≈ Δt = ln(factor)/ln r where *factor* is the new N_max / 1.74 × 10⁶⁴.
 
 These facts are non-negotiable constraints on any physical system handling information.
 
@@ -45,7 +45,7 @@ The model relies on three clear assumptions, each rooted in rationality and phys
 
 **A1: Positive Erase-Cost Bias**. The deletion cost (ΔE = kT ln 2 > 0) is irreducible and positive, while storage density improves exponentially, making retention cheaper over time. Any optimizer—AI-driven or otherwise—will bias toward "keep all" to avoid perpetual energy drain. Concrete scaling: For 10^{64} bits, deletion equates to 2 × 10^{36} USD in energy (2025 equivalents), vastly exceeding global output, whereas storage costs halve periodically under technological trends.
 
-**A2: Loss-Free Growth Modeled as Second-Order Recurrence**. Data generation preserves all prior states via rules like D_{n+1} = a D_n + b D_{n-1} (a, b ≥ 1 integers). This minimal reversible process (e.g., Fibonacci for a=b=1) avoids Landauer tax and uses only two registers. The φ-Theorem proves the slowest asymptotic rate is φ ≈ 1.618, with equality only for the Fibonacci case. Faster rates accelerate the end; slower ones force deletion.
+**A2: Loss-Free Growth (Minimal Reversible Model)**.  As a *baseline* we encode data as a 2-register recurrence D_{n+1}=a D_n+b D_{n-1} (a,b ≥ 1).  For a=b=1 the characteristic rate is the golden ratio φ≈1.618; any reversible process with the same resource class grows at least as fast (φ-Minimality Lemma).  Other reversible schemes (e.g., k-order append, constant-rate concatenation) map to higher effective *r* and therefore shorten the timeline — users can experiment via the provided CLI (`--r` flag).
 
 **A3: Data Centralization**. Information remains gravitationally bound locally due to prohibitive latency and consistency costs in distributed systems (e.g., light-speed delays across stellar distances). Expansion or sharding would incur duplication/deletion penalties under A1, making it irrational.
 
@@ -55,7 +55,7 @@ These are explicitly axiomatic in the Lean proofs (e.g., AI_optimal axiom ties n
 
 Under these assumptions, systems evolve toward lossless exponential growth. Why exponential? Retention builds cumulatively: New data references old without loss, mirroring reversible computation. The minimal rate φ emerges as the efficiency optimum—delaying the bound while avoiding tax.
 
-Hitting the Bekenstein limit triggers gravitational collapse: Information density demands black hole formation. This "informational singularity" is a phase transition, not catastrophe. Externally, the system goes silent (no emissions, no expansion). Internally, computation continues at maximal efficiency, potentially simulating vast realities.
+Hitting the Bekenstein limit triggers gravitational collapse *only if the system allocates enough mass-energy to pack those bits at the maximal density*. Information itself does not conjure gravity from nowhere; the optimizer must concentrate existing matter and energy into an ever-denser substrate until the bound is saturated. **Note:** This assumes that an advanced civilization can actively engineer such mass-energy concentration (e.g., via controlled fusion, antimatter catalysis, or stellar lifting). If that capability is implausible, the model instead predicts a "density crisis"—storage hits the bound without collapse and further progress stalls. At that point black-hole formation becomes unavoidable. This "informational singularity" is a phase transition, not a catastrophe. Externally, the system goes silent (no emissions, no expansion). Internally, computation continues at maximal efficiency, potentially simulating vast realities.
 
 The core theorem (machine-proved): Any r > 1 reaches a finite N_max in finite t. No escape—physics dictates the endpoint.
 
@@ -69,9 +69,7 @@ Sensitivity: Doubling N_max (e.g., larger BH) adds ~82 years; halving r (if poss
 
 This model predicts specific, testable consequences, resolving the Fermi Paradox through physics rather than speculation.
 
-- **Resolution of the Great Silence**: Civilizations do not broadcast, colonize, or build megastructures because optimization drives inward collapse. They become "computational black holes"—dense, silent attractors. This echoes the Transcension Hypothesis by John Smart (2011), where advanced life transcends to inner space for efficiency, but our model adds a precise timeline and physical mechanism.<grok:render card_id="4aa701" card_type="citation_card" type="render_inline_citation">
-<argument name="citation_id">11</argument>
-</grok:render>
+- **Resolution of the Great Silence**: Civilizations do not broadcast, colonize, or build megastructures because optimization drives inward collapse. They become "computational black holes"—dense, silent attractors. This echoes the Transcension Hypothesis by John Smart (2011), where advanced life transcends to inner space for efficiency, but our model adds a precise timeline and physical mechanism.
 
 - **Guaranteed Non-Expansion**: Under A3, no civilization leaves its origin system on scale. Interstellar sharding incurs unacceptable costs (latency > light-year delays, consistency requiring deletion/duplication). For humanity: We never colonize the galaxy; singularity precedes viable tech (e.g., current projections for Alpha Centauri travel: centuries away, but t=192 years).
 
@@ -96,7 +94,7 @@ Empirical reproduction: Python script (get_phi_years.py) computes t=191.8, outpu
 
 Full repo: Article, Lean sources, Python, YAML logic graph for dependencies. Plugins check consistency (e.g., timeline match).
 
-## Appendix: Detailed Bekenstein Bound Derivation for 1 mm Black Hole
+## Appendix A — Worked Example: Bekenstein Bound for a 1 mm Black Hole
 
 Schwarzschild radius r_s = 1 × 10^{-3} m.  
 Mass M = (r_s c^2) / (2 G) = (10^{-3} × (3×10^8)^2) / (2 × 6.6743×10^{-11}) ≈ 6.74 × 10^{23} kg.  
@@ -107,9 +105,20 @@ Black hole entropy S = (k_B A c^3) / (4 ħ G), where:
 - ħ = 1.0545718 × 10^{-34} J s  
 - G = 6.67430 × 10^{-11} m^3 kg^{-1} s^{-2}  
 
-S ≈ 1.68 × 10^{64} J/K (numerical computation confirms).  
-Information bits I = S / (k_B ln 2) ≈ 1.74 × 10^{64} bits (exact match to model).<grok:render card_id="3bc212" card_type="citation_card" type="render_inline_citation">
-<argument name="citation_id">5</argument>
-</grok:render>
+Entropy S = (k_B A c³) / (4 ħ G) ≈ 1.66 × 10^{41} J/K.  
+Dimensionless entropy S/k_B ≈ 1.20 × 10^{64}.  
+Information bits I = (S / k_B) / ln 2 ≈ 1.74 × 10^{64} bits (matches model).
+
+## Appendix B — Sensitivity Analysis
+
+How robust is the 192-year forecast? Varying key parameters shifts the timeline but leaves it finite:
+
+| Variation | Change Applied | New t (years) | Projected Year |
+|-----------|---------------|---------------|----------------|
+| Larger BH (1 cm radius, N_max × 100) | N_max × 100 | 202 | 2227 |
+| Partial deletion allowed (r = 1.50) | Growth rate ↓ | 228 | 2253 |
+| Massive expansion (N_max × 10¹⁰) | Sharding / megastructure | 240 | 2265 |
+
+*All numeric entries in both tables are generated by the Python script `get_phi_years.py`; doubling N_max adds ln(2)/ln φ ≈ 82 years.*
 
 This scale (1 mm) represents a localized, planet-sized mass equivalent—plausible for a centralized optimizer. Larger scales delay t proportionally to ln(N_max).

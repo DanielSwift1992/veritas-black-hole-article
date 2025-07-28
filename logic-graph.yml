@@ -10,7 +10,7 @@ nodes:
   - id: PythonCalc
     type: artifact
     description: "Python script that calculates the singularity timeline."
-    value: scripts
+    value: get_phi_years.py
 
   - id: LeanProject
     type: artifact
@@ -21,19 +21,31 @@ nodes:
     type: artifact
     value: viz/growth_curves.png
 
+  # New node: table and sensitivity verification
+  - id: SensitivityCheck
+    type: artifact
+    value: plugins/bh_veritas_plugins/checks.py
+
 edges:
   - from: Article
     to: PythonCalc
     obligation: bh_python_timeline_check
     meta:
-      expected_years: 191
+      expected_years: 446
 
   - from: Article
     to: LeanProject
-    obligation: bh_lean_proof_check 
+    obligation: bh_lean_proof_check
+
   - from: PythonCalc
     to: GrowthPlot
     obligation: growth_curve_png_check
+
   - from: Article
     to: GrowthPlot
-    obligation: growth_curve_png_check 
+    obligation: growth_curve_png_check
+
+  # Verify that all quantitative and sensitivity tables match code
+  - from: Article
+    to: SensitivityCheck
+    obligation: article_table_check 

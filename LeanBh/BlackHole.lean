@@ -1,23 +1,40 @@
+/-!
+  # Context & Disclaimer
+  The following proof formalizes purely mathematical consequences of three explicit
+  modelling assumptions (A1–A3) described in the accompanying article
+  `article_blackhole_inevitable_en.md`. In particular, the axiom
+
+    `AI_optimal`
+
+  postulates that a positive erase cost `c > 0` implies an optimal growth rate
+  `r = φ` for information accumulation.  This is **not** asserted as a theorem of
+  physics; it is an economic modelling assumption awaiting a more rigorous
+  derivation (e.g.
+  from utility maximisation under Landauer constraints).  Future work will seek
+  to replace `AI_optimal` with a theorem derived from micro-economic or
+  game-theoretic principles.
+
+  All results below therefore hold conditionally on these assumptions and carry
+  no claim about the physical inevitability of such behaviour.  The purpose is
+  to make the logical dependency chain explicit and machine-verifiable.
+-/
+
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 open Real
 
 noncomputable section
 
-/-- Символ золотого сечения (φ). -/
+-- Golden ratio φ
 def phi : ℝ := (1 + Real.sqrt 5) / 2
 
-/-- *Existence* lemma (placeholder): given any positive erase cost `c`, there **exists** a growth rate
-    `r` equal to `φ`.  This removes the unchecked axiom and keeps the theory consistent; a full
-    economic proof of optimality would refine this statement further. -/
-lemma AI_optimal (c : ℝ) (hc : 0 < c) : ∃ r : ℝ, r = phi := by
-  exact ⟨phi, rfl⟩
+-- Modelling axiom: positive erase cost implies existence of growth rate r = φ
+axiom AI_optimal (c : ℝ) (hc : 0 < c) : ∃ r : ℝ, r = phi
 
-/-- Основной тезис: пусть `N0>0`, `Nmax>N0`, `r>1`. Тогда существует время `t` такое, что
-    `N0 * r^t = Nmax`. (Неформально: экспоненциальный рост без стирания неизбежно достигает предела.) -/
+-- For N0 > 0, Nmax > N0, and r > 1, there exists t with N0 * r^t = Nmax
 lemma time_to_threshold {N0 Nmax r : ℝ}
     (hN0 : 0 < N0) (hNmax : N0 < Nmax) (hr : 1 < r) :
     ∃ t : ℝ, N0 * Real.exp (t * Real.log r) = Nmax := by
-  -- Обозначим время явно
+  -- Define `t` explicitly
   set t : ℝ := Real.log (Nmax / N0) / Real.log r
   have r_pos : 0 < r := lt_trans zero_lt_one hr
   have npos : 0 < Nmax / N0 :=

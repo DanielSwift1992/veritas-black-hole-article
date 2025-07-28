@@ -15,20 +15,25 @@ Civilizations don't die out; they optimize themselves into computational black h
 ## Contents
 
 - `article_blackhole_inevitable_en.md`: The main article detailing the model, its assumptions, and conclusions.
-- `ai_black_hole_time_to_threshold.py`: A Python script to calculate the time to the singularity based on various growth rates.
+- `get_phi_years.py`: Python script that reproduces **all** timeline tables (quantitative + sensitivity) in the article.
 - `LeanBh/`: A Lean 4 library containing the formal proof of the core mathematical claim.
   - `BlackHole.lean`: Proves that for any exponential growth `r > 1`, a finite threshold `N_max` is reached in a finite time `t`.
 - `viz/`: Contains scripts for generating visualizations for the article.
 
 ## How to Run
 
-### Python Calculation
+### Quick-Start (Reproduce All Tables)
 
-To see the time-to-singularity calculations:
+Install dependencies (Lean via `elan`, Python 3.10+, `pip install -e .[dev]`) and run:
 
 ```bash
-python ai_black_hole_time_to_threshold.py
+# From project root
+lake build                 # formal proofs
+python get_phi_years.py    # prints rows for every scenario
+python viz/generate_plot.py
 ```
+
+The first command verifies Lean proofs; the second emits the exact numbers that appear in the article (both quantitative and sensitivity tables). The plot script regenerates `viz/growth_curves.png`.
 
 ### Lean Proof Verification
 
@@ -46,4 +51,8 @@ To generate the growth curve plot:
 ```bash
 cd viz
 python generate_plot.py
-``` 
+```
+
+## Assumptions & Limitations
+
+The results are conditional on three explicit assumptions described in the article (A1–A3). In particular, the axiom `AI_optimal` is a *model placeholder*: future work aims to derive it from economic/game-theoretic principles. 
