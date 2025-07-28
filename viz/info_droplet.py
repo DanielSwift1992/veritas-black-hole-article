@@ -8,12 +8,12 @@ ax.axis('off')
 
 # Left: sharded
 for x in [-2,-1,0]:
-    ax.add_patch(Circle((x,0),0.4,edgecolor='steelblue',facecolor='none',linewidth=2))
-ax.text(-1, -1, 'Sharded\n(high surface)',ha='center')
+    ax.add_patch(Circle((x,0),0.4,edgecolor='#1f77b4',facecolor='none',linewidth=2))  # blue
+ax.text(-1, -1.2, 'Sharded\n(high surface)',ha='center')
 
 # Right: centralized
-ax.add_patch(Circle((2,0),1.0,edgecolor='darkgreen',facecolor='none',linewidth=2))
-ax.text(2, -1.3, 'Centralized\n(min surface)',ha='center')
+ax.add_patch(Circle((2,0),1.0,edgecolor='#ff7f0e',facecolor='none',linewidth=2))  # orange
+ax.text(2, -1.6, 'Centralized\n(min surface)',ha='center')
 
 plt.xlim(-3.5,4)
 plt.ylim(-2,2)
