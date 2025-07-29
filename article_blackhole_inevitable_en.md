@@ -4,18 +4,18 @@
 
 ## Abstract
 
-The Fermi Paradox questions the absence of observable advanced civilizations in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Any progressing civilization (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Illustratively, using the current global data volume (≈ 181 ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ 1.618), the threshold arrives in ≈ 192 years. Derived mathematically, verified in Lean4, the proof shows silence as physical necessity, not extinction. Model robust to variations, consistent with recent JWST observations.
+The Fermi Paradox questions the absence of observable advanced civilizations in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Any progressing civilization (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Given today’s global data volume (~181 ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ 1.618), the threshold arrives in ≈ 192 years. Derived mathematically, verified in Lean4, the proof shows silence as physical necessity, not extinction. Model robust to variations, consistent with recent JWST observations.
 
 ## Executive Summary
 
-**Key idea.** Advanced civilizations disappear from view not by dying out, but by collapsing into ultra-compact, information-dense objects.  Physics itself drives the silence.
+**Key idea.** Advanced civilizations disappear from view not by dying out, but by collapsing into ultra-compact, information-dense objects. Silence is not a choice, but a physical inevitability.
 
 **Why it is inevitable.**  
 • Erasing information demands energy (Landauer’s principle [1–3]).  
 • Storing information faces a finite surface-area limit (Bekenstein bound [4]).  
 • Any culture with net positive information growth (r > 1) therefore hits that limit in finite time.
 
-**What happens next.** Crossing the bound forces mass-energy to condense; the result is a “computational black hole” — internally active, externally dark.  An illustrative φ-baseline places humanity ~192 years from the threshold, but code lets readers explore any parameters.
+**What happens next.** Exceeding the information-density bound forces civilizations to concentrate mass-energy, triggering gravitational collapse into black holes. An illustrative φ-baseline places humanity ~192 years from the threshold, but code lets readers explore any parameters.
 
 ### Quantitative Forecast (Illustrative)
 
@@ -51,7 +51,7 @@ The proof relies on one weak, nearly tautological principle rooted in the defini
 
 **P1: Minimal Progress**. Any non-stagnant, non-regressing civilization has effective average information growth r > 1 over long timescales. 
 
-This follows from the anthropic context of the Fermi Paradox: we look for *observable* civilizations, which presupposes growth (r > 1).  Stagnation (r = 1) or regression (r < 1) naturally yields silence through resource decay, so **opposing P1 means accepting silence as the default and resolving the paradox without further physics**.
+This follows from the anthropic context of the Fermi Paradox: we look for *observable* civilizations, which presupposes growth (r > 1).  Stagnation (r = 1) or regression (r < 1) naturally yields silence through resource decay, so rejecting P1 implies civilizations never grow enough to be observable, trivially resolving the paradox.
 
 ## Why Informational Growth Leads to Black Holes
 
@@ -61,7 +61,7 @@ The "informational singularity" is a phase transition: Externally, no emissions 
 
 ### Why Civilizations Don’t Expand Across Space
 
-Why no sharding or interstellar spread? Surface-tension physics provides the analogy.
+Why no sharding or interstellar spread? Surface-tension physics explains why sharding is energetically prohibitive.
 
 *Informational droplet.* Water droplets minimize surface area to reduce energy loss. Distributed information has an "informational surface": Communication channels dissipate energy per Landauer (transmitted bits copied/erased). Sharding into n nodes at distance d increases surface ~ n d, raising costs.
 
@@ -80,17 +80,17 @@ Proof intuition: On log scale, exponential growth is an upward line; bound is ho
 
 For illustration under a minimal loss-free growth baseline (φ-rate), see the forecast table and figures above.
 
-Sensitivity (Appendix B): Variations shift t proportionally to ln(change), but finiteness holds.
+Sensitivity (Appendix B): All parameter variations shift timelines slightly but preserve the inevitability of finite-time collapse.
 
 ## Implications
 
 The theorem reframes the Fermi question.  Rational optimisation drives civilisations inward rather than outward, so the expected observable state is a silent, highly-dense “computational black hole”.  Sharding or interstellar spread remains theoretically possible, yet the energy overhead of synchronising distant shards (Fig. 3) makes expansion uneconomical; collapse or stagnation occurs first.  In this view the Great Filter is not a catastrophic event but a predictable phase transition that every progressing culture eventually crosses.
 
-For humanity the illustrative φ-baseline places the transition approximately 192 years ahead, implying that data-retention economics—not spaceflight—will dominate the next two centuries.  Observable consequences follow: we should not expect Dyson-scale engineering, but rather compact, low-emission systems.  Search strategies such as SETI therefore benefit from focusing on black-hole signatures or anomalous infrared deficits.
+For humanity the illustrative φ-baseline places the transition approximately 192 years ahead, implying that data-retention economics—not spaceflight—will dominate the next two centuries.  Observable consequences follow: we should not expect Dyson-scale engineering, but rather compact, low-emission systems.  SETI efforts should thus prioritize searches for anomalous black-hole-like objects or unexpected infrared voids.
 
 Recent JWST rotation asymmetry [6] aligns with the model’s focus on local optimisation.  If the signal reflects cosmic rotation the centripetal trend only strengthens; if it is a Doppler calibration issue, timelines merely rescale (Fig. 2) yet remain finite.
 
-Counter-scenarios лишь сдвигают сроки.  Если стирание станет почти бесплатным (физически спорно), рост замедлится, но при ⟨r⟩ > 1 сингулярность всё равно достигается; если появится дешёвое шардирование, дополнительная коммуникационная энтропия, наоборот, ускорит порог.  Лишь подлинная стагнация — r ≤ 1 — выводит систему из теоремы, но такие миры молчат по определению.
+Counter-scenarios—such as near-free data erasure (physically doubtful) or exceptionally efficient sharding—merely shift the timeline.  True stagnation (r ≤ 1) avoids collapse, but such civilizations remain silent by definition.
 
 ## Verification: Proofs, Code, Reproducibility
 
@@ -114,7 +114,7 @@ Bits = (S/k_B)/ln2 ≈ 1.74 × 10^{64}.
 
 ## Appendix B: Sensitivity Analysis
 
-Robustness: Variations shift t finite.
+Robustness: All parameter variations alter timelines by at most logarithmic factors, yet finite-time collapse remains unavoidable.
 
 | Variation | Change | t (years) | Year |
 |-----------|--------|-----------|------|
