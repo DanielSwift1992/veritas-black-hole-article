@@ -1,4 +1,4 @@
-# Informational Black Holes: A Physical Proof for the Fermi Paradox
+# Informational Black Holes: The Physical Resolution to the Fermi Paradox
 
 *Last updated: 28 Jul 2025*
 
@@ -8,7 +8,7 @@ The Fermi Paradox questions the absence of observable advanced negentropic syste
 
 ## Executive Summary
 
-**Key idea.** Advanced negentropic nodes disappear from view not by dying out, but by collapsing into ultra-compact, information-dense objects. Silence is not a choice, but a physical inevitability.
+**Key idea.** Advanced negentropic nodes disappear from view not by dying out, but by collapsing into ultra-compact, information-dense objects. This provides a physical resolution – not just a speculative answer – to the Great Silence.
 
 **Why it is inevitable.**  
 • Erasing information demands energy (Landauer’s principle [1–3]).  

@@ -28,6 +28,7 @@ INCLUDE_PATHS = [
     "lake-manifest.json",
     "ai_black_hole_time_to_threshold.py",
     "get_phi_years.py",
+    "probe_cost.py",
 ]
 
 INCLUDE_DIRS = [

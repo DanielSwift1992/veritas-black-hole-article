@@ -14,6 +14,7 @@ setup(
             'robust_png_check = plugins.bh_veritas_plugins.checks:robust_png_check',
             'droplet_png_check = plugins.bh_veritas_plugins.checks:droplet_png_check',
             'storage_table_check = plugins.bh_veritas_plugins.checks:StorageTableCheck',
+            'probe_table_check = plugins.bh_veritas_plugins.checks:ProbeTableCheck',
         ],
     },
 ) 

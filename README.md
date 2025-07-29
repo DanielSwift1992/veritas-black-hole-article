@@ -1,4 +1,4 @@
-# Informational Black Holes: A Physical Proof for the Fermi Paradox
+# Informational Black Holes: The Physical Resolution to the Fermi Paradox
 
 This repository contains the article, code, and formal proof for a model that explains the Fermi Paradox ("The Great Silence") through a physical calculation.
 
@@ -15,6 +15,7 @@ Civilisations thus converge to compact, silent “computational black holes”: 
 - `LeanBh/`: A Lean 4 library containing the formal proof of the core mathematical claim.
   - `BlackHole.lean`: Proves that for any exponential growth `r > 1`, a finite threshold `N_max` is reached in a finite time `t`.
 - `viz/`: Contains scripts for generating visualizations for the article.
+- `probe_cost.py`: script for the Courier-to-Proxima case study.
 
 ## How to Run
 

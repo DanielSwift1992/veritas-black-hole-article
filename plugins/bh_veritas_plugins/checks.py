@@ -341,3 +341,41 @@ class StorageTableCheck(BaseCheck):
         if failures:
             return CheckResult.failed("Storage table mismatch:\n" + "\n".join(failures))
         return CheckResult.passed("Storage economics table matches script output.") 
+
+# ---------------------------------------------------------------------------
+# Probe courier table check
+# ---------------------------------------------------------------------------
+
+@plugin("probe_table_check")
+class ProbeTableCheck(BaseCheck):
+    """Ensure Probe case study numbers in article match probe_cost.py output."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        script = repo_root / "probe_cost.py"
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not (script.exists() and article.exists()):
+            return CheckResult.failed("probe_cost.py or article missing")
+
+        import subprocess, csv, sys, re
+        try:
+            proc = subprocess.run([sys.executable, str(script), "--csv"], capture_output=True, text=True, check=True)
+        except Exception as e:
+            return CheckResult.failed(f"probe_cost.py failed: {e}")
+
+        reader = csv.DictReader(proc.stdout.splitlines())
+        data = next(reader)
+        expected_cost = float(data["Cost_USD_per_bit"])
+        # search table line with Cost per transmitted bit
+        pattern = re.compile(r"Cost per transmitted bit.*?\|\s*([0-9.]+e[+-][0-9]+)")
+        for line in article.read_text(encoding="utf-8").splitlines():
+            if "Cost per transmitted bit" in line:
+                m = pattern.search(line)
+                if not m:
+                    return CheckResult.failed("Could not parse cost value in article table")
+                val = float(m.group(1))
+                if abs(math.log10(val) - math.log10(expected_cost)) < 0.5:
+                    return CheckResult.passed("Probe table consistent with script output")
+                else:
+                    return CheckResult.failed(f"Mismatch: article {val:.1e} vs script {expected_cost:.1e}")
+        return CheckResult.failed("Probe table row not found in article") 

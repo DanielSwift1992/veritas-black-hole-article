@@ -38,6 +38,11 @@ nodes:
     type: artifact
     value: storage_crossover.py
 
+  - id: ProbeCalc
+    type: artifact
+    description: "Courier probe cost script."
+    value: probe_cost.py
+
 edges:
   - from: Article
     to: PythonCalc
@@ -73,6 +78,10 @@ edges:
   - from: Article
     to: StorageEconomics
     obligation: storage_table_check
+
+  - from: Article
+    to: ProbeCalc
+    obligation: probe_table_check
 
   # Centralization energy inequality
   - from: Article
