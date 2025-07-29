@@ -4,7 +4,7 @@
 
 ## Abstract
 
-The Fermi Paradox questions the absence of observable advanced negentropic systems in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Any non-stagnant negentropic system (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Given today’s global data volume (~181 ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ 1.618), the threshold arrives in ≈ 192 years. Derived mathematically and verified in Lean4, the proof shows silence as a physical necessity, not extinction. Model robust to variations, consistent with recent JWST observations.
+The Fermi Paradox questions the absence of observable advanced negentropic systems (entities—biological, artificial, or otherwise—that sustain themselves by locally reducing entropy and creating information) in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Any non-stagnant negentropic system (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Given today’s global data volume (~181 ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ 1.618), the threshold arrives in ≈ 192 years. Derived mathematically and verified in Lean4, the proof shows silence as a physical necessity, not extinction. Model robust to variations, consistent with recent JWST observations.
 
 ## Executive Summary
 
@@ -63,6 +63,24 @@ Deletion of a bit carries a fixed physical cost (Landauer). Storage, however, gr
 `log10 ratio` shows orders of magnitude: positive means storing still costlier; zero marks parity; negative means storing becomes cheaper than deleting. The script `storage_crossover.py` reproduces the numbers; the Veritas check `storage_table_check` keeps the article honest.
 
 *Illustration.* In 2150 deleting a single bit costs as much as storing ~400 bits; by 2217 the same energy could store ≈6×10^{11} bytes (about 600 GB, comparable to a full 4K movie library). The rational choice flips from erasure to hoarding long before the density crisis, reinforcing the drive toward ever-growing archives.
+
+### Case Study — Courier to Proxima
+
+Sending even the lightest probe becomes economically absurd long before the singularity. Assume a 1 kg "chip-sat" accelerated to 0.1 c toward Proxima Centauri (4.2 ly).
+
+| Parameter | Symbol | Value | Note |
+|-----------|--------|-------|------|
+| Distance | d | 4.2 ly ≈ 4.0 × 10¹⁶ m | one-way |
+| Probe mass | m | 1 kg | minimal payload |
+| Cruise speed | v | 0.1 c | optimistic |
+| Kinetic energy | Eₖ | 4.5 × 10¹⁵ J | ½ mv² |
+| Energy cost (0.10 USD/kWh) | Cₑ | 1.3 × 10¹¹ USD | launch only |
+| Payload | N | 1 TB = 8 × 10¹² bit | |
+| Cost per transmitted bit | C_send | 1.6 × 10⁻² USD/bit | compare table above |
+
+By 2075 local storage of one bit costs 6 × 10⁻²⁰ USD—**seventeen orders cheaper**. The gap widens exponentially; by 2217 sending one bit consumes the budget that could store 4 × 10²⁸ bits. Interstellar transmission is thus thermodynamic extravagance.
+
+`probe_cost.py` reproduces these numbers and can explore alternative masses, speeds, or energy prices.
 
 ## Minimal Negentropy Principle: Why Growth Occurs
 
