@@ -45,6 +45,25 @@ The φ-scenario yields t ≈ 191.8 years. We round this up to 192 for conservati
 
 These facts are non-negotiable constraints on any physical information-handling system.
 
+## Information Economics: The Crossover Year
+
+Deletion of a bit carries a fixed physical cost (Landauer). Storage, however, grows exponentially cheaper. The table below shows when keeping data overtakes deleting it economically under conservative assumptions (cost halves every two years).
+
+| Year | Store USD/bit | Delete USD/bit | Transmit USD/bit (1 ly) | Store/Delete | log10(S/D) | Store/Transmit |
+|------|---------------|----------------|--------------------------|--------------|-------------|----------------|
+| 2025 | 2.0e-12 | 1.2e-28 | 1.1e-12 | 1.7e16 | +16.2 | 1.8e0 |
+| 2050 | 3.5e-16 | 1.2e-28 | 1.1e-12 | 2.9e12 | +12.5 | 3.0e-4 |
+| 2075 | 6.0e-20 | 1.2e-28 | 1.1e-12 | 5.0e8 | +8.7 | 5.3e-8 |
+| 2100 | 1.0e-23 | 1.2e-28 | 1.1e-12 | 8.6e4 | +4.9 | 9.1e-12 |
+| 2106 | 1.3e-24 | 1.2e-28 | 1.1e-12 | 1.1e4 | +4.0 | 1.1e-12 |
+| 2125 | 1.8e-27 | 1.2e-28 | 1.1e-12 | 1.5e1 | +1.2 | 1.6e-15 |
+| 2150 | 3.1e-31 | 1.2e-28 | 1.1e-12 | 2.6e-3 | -2.6 | 2.7e-19 |
+| 2217 | 2.5e-41 | 1.2e-28 | 1.1e-12 | 2.1e-13 | -12.7 | 2.2e-29 |
+
+`log10 ratio` shows orders of magnitude: positive means storing still costlier; zero marks parity; negative means storing becomes cheaper than deleting. The script `storage_crossover.py` reproduces the numbers; the Veritas check `storage_table_check` keeps the article honest.
+
+*Illustration.* In 2150 deleting a single bit costs as much as storing ~400 bits; by 2217 the same energy could store ≈6×10^{11} bytes (about 600 GB, comparable to a full 4K movie library). The rational choice flips from erasure to hoarding long before the density crisis, reinforcing the drive toward ever-growing archives.
+
 ## Minimal Negentropy Principle: Why Growth Occurs
 
 The proof relies on one weak, nearly tautological principle rooted in basic thermodynamics:

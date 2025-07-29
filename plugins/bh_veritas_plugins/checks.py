@@ -159,9 +159,9 @@ def _png_check(name: str, png_path: str, script_path: str):
     return _Check
 
 # Register two more PNG checks
-_png_check("robust_png_check", "viz/robust_recal.png", "viz/robust_plot.py")
-_png_check("droplet_png_check", "viz/info_droplet.png", "viz/info_droplet.py")
-_png_check("growth_curve_png_check", "viz/growth_curves.png", "viz/generate_plot.py")
+robust_png_check = _png_check("robust_png_check", "viz/robust_recal.png", "viz/robust_plot.py")
+droplet_png_check = _png_check("droplet_png_check", "viz/info_droplet.png", "viz/info_droplet.py")
+growth_curve_png_check = _png_check("growth_curve_png_check", "viz/growth_curves.png", "viz/generate_plot.py")
 
 @plugin("article_table_check")
 class ArticleTableCheck(BaseCheck):
@@ -279,3 +279,65 @@ class CentralizationEnergyCheck(BaseCheck):
         if out == "PASS":
             return CheckResult.passed("Sharded energy ≥ centralized energy as expected.")
         return CheckResult.failed("Energy inequality not satisfied (output: " + out + ")") 
+
+# ---------------------------------------------------------------------------
+# Storage economy table check
+# ---------------------------------------------------------------------------
+
+@plugin("storage_table_check")
+class StorageTableCheck(BaseCheck):
+    """Verify that the Information Economics table in the article matches storage_crossover.py output."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        script = repo_root / "storage_crossover.py"
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not script.exists():
+            return CheckResult.failed("storage_crossover.py not found")
+        if not article.exists():
+            return CheckResult.failed("Article file not found")
+
+        try:
+            proc = subprocess.run([
+                sys.executable,
+                str(script),
+                "--csv",
+            ], capture_output=True, text=True, check=True, timeout=10)
+        except Exception as e:
+            return CheckResult.failed(f"Failed to run storage_crossover.py: {e}")
+
+        csv_lines = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip()]
+        reader = csv.DictReader(csv_lines)
+        expected: Dict[int, Tuple[float, float]] = {}
+        for row in reader:
+            yr = int(row["Year"])
+            ratio = float(row["RatioStoreToDelete"])
+            transmit_ratio = float(row["RatioStoreToTransmit"])
+            expected[yr] = (ratio, transmit_ratio)
+
+        # Locate table lines in article (look for '| 2106 |' etc.)
+        failures = []
+        for line in article.read_text(encoding="utf-8").splitlines():
+            if line.strip().startswith("|"):
+                parts = [p.strip() for p in line.strip().strip("|").split("|")]
+                if len(parts) < 4:
+                    continue
+                try:
+                    yr = int(parts[0])
+                    ratio_text = parts[4]
+                    log_text = parts[5]
+                    transmit_text = parts[6]
+                    ratio = float(ratio_text)
+                    transmit_ratio = float(transmit_text)
+                except ValueError:
+                    continue
+                if yr in expected:
+                    exp_ratio, exp_transmit = expected[yr]
+                    if abs(math.log10(ratio) - math.log10(exp_ratio)) > 0.5 or abs(math.log10(transmit_ratio) - math.log10(exp_transmit)) > 0.5:
+                        failures.append(f"Mismatch for year {yr}: ratios article {ratio:.1e}/{transmit_ratio:.1e} vs script {exp_ratio:.1e}/{exp_transmit:.1e}")
+                    expected.pop(yr)
+        if expected:
+            failures.append("Article missing rows for years: " + ", ".join(map(str, expected.keys())))
+        if failures:
+            return CheckResult.failed("Storage table mismatch:\n" + "\n".join(failures))
+        return CheckResult.passed("Storage economics table matches script output.") 

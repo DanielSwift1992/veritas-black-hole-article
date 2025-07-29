@@ -34,12 +34,16 @@ nodes:
     type: artifact
     value: plugins/bh_veritas_plugins/checks.py
 
+  - id: StorageEconomics
+    type: artifact
+    value: storage_crossover.py
+
 edges:
   - from: Article
     to: PythonCalc
     obligation: bh_python_timeline_check
     meta:
-      expected_years: 446
+      expected_years: 192
 
   - from: Article
     to: LeanProject
@@ -65,6 +69,10 @@ edges:
   - from: Article
     to: SensitivityCheck
     obligation: article_table_check
+
+  - from: Article
+    to: StorageEconomics
+    obligation: storage_table_check
 
   # Centralization energy inequality
   - from: Article
