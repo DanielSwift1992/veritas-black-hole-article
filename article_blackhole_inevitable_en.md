@@ -25,13 +25,13 @@ The Fermi Paradox questions the absence of observable advanced civilizations in 
 | Big-Data (40% annual) | 1.40 | 275 | 2300 |
 | φ Baseline (Minimal Lossless) | 1.618 | 192 | 2217 |
 
-The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Python verification: Exact computation confirms 2217 (2025 + ceil(191.8)).
+The φ-scenario yields t ≈ 191.8 years. We round this up to 192 for conservatism. Python verification confirms 2217 (2025 + ceil 191.8).
 
 ![Informational Singularity Timeline](viz/growth_curves.png)  
-*Figure 1 — Exponential data-growth curves (log-scale) intersect the finite Bekenstein bound.  The φ-trajectory crosses at 2217 CE; conservative and big-data scenarios follow.*
+*Figure 1 — Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at 2217 CE. Conservative and big-data scenarios follow.*
 
 ![Robustness to Boundary Rescaling](viz/robust_recal.png)  
-*Figure 2 — Doubling the information bound delays the intersection by ≈1.44 years; finiteness is unaffected.*
+*Figure 2 — Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.*
 
 ---
 
@@ -41,7 +41,7 @@ The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Pytho
 
 2. **Bekenstein Bound** [4]: Maximum bits in a region scale with the surface area of the container and are saturated by black holes. For reference Schwarzschild radius rₛ = 1 mm, N_max ≈ 1.74 × 10⁶⁴ bits[^scale].
 
-[^scale]: N_max ∝ rₛ². Rescaling shifts timelines by Δt = ln(factor)/ln r; finiteness preserved.
+[^scale]: N_max ∝ rₛ². Rescaling shifts timelines by Δt = ln(factor)/ln r. Finiteness is preserved.
 
 These facts are non-negotiable constraints on any physical information-handling system.
 
@@ -55,9 +55,9 @@ This follows from the anthropic context of the Fermi Paradox: we look for *obser
 
 ## Why Informational Growth Leads to Black Holes
 
-Progressing systems (P1) evolve toward exponential information growth to minimize erasure costs (Landauer's principle). Hitting the Bekenstein limit triggers a density crisis: To continue, the system must pack bits at maximal density, requiring mass-energy concentration. This leads to gravitational collapse into a black hole if engineered, or stagnation if not — both silent externally.
+Progressing systems (P1) evolve toward exponential information growth to minimize erasure costs (Landauer's principle). Hitting the Bekenstein limit triggers a density crisis: To continue, the system must pack bits at maximal density, requiring mass-energy concentration. This dynamic leads to gravitational collapse into a black hole if engineered, or to stagnation if not (both outcomes are externally silent).
 
-The "informational singularity" is a phase transition: Externally, no emissions or expansion; internally, maximal computation efficiency.
+The "informational singularity" is a phase transition. Externally, there are no emissions or expansion. Internally, computation runs at maximal efficiency.
 
 ### Why Civilizations Don’t Expand Across Space
 
@@ -68,13 +68,13 @@ Why no sharding or interstellar spread? Surface-tension physics explains why sha
 E_sharded ≥ E_central + n d kT ln 2 (for sync traffic). Non-zero d makes sharding strictly more expensive, favoring local centralization. Code: `get_phi_years.py --compare-sharded`.
 
 ![Informational Droplet Analogy](viz/info_droplet.png)  
-*Figure 3 — Sharding increases “informational surface” and dissipation; centralisation minimises it.*
+*Figure 3 — Sharding increases “informational surface” and dissipation. Centralisation minimises it.*
 
 ## The Core Theorem: Finite-Time Singularity
 
 From facts and principle follows the theorem: Any r > 1 reaches finite N_max in finite t (machine-proved in BlackHole.lean).
 
-Proof intuition: On log scale, exponential growth is an upward line; bound is horizontal. Non-parallel lines intersect — geometric inevitability.
+Proof intuition: On a log scale, exponential growth is an upward line while the bound is horizontal. Non-parallel lines intersect — a geometric inevitability.
 
 ## Illustrative Calculation: Time to Singularity
 
@@ -84,13 +84,13 @@ Sensitivity (Appendix B): All parameter variations shift timelines slightly but 
 
 ## Implications
 
-The theorem reframes the Fermi question.  Rational optimisation drives civilisations inward rather than outward, so the expected observable state is a silent, highly-dense “computational black hole”.  Sharding or interstellar spread remains theoretically possible, yet the energy overhead of synchronising distant shards (Fig. 3) makes expansion uneconomical; collapse or stagnation occurs first.  In this view the Great Filter is not a catastrophic event but a predictable phase transition that every progressing culture eventually crosses.
+The theorem reframes the Fermi question.  Rational optimisation drives civilisations inward rather than outward, so the expected observable state is a silent, highly-dense “computational black hole”.  Sharding or interstellar spread remains theoretically possible, yet the energy overhead of synchronising distant shards (Fig. 3) makes expansion uneconomical, so collapse or stagnation occurs first.  In this view the Great Filter is not a catastrophic event but a predictable phase transition that every progressing culture eventually crosses.
 
 For humanity the illustrative φ-baseline places the transition approximately 192 years ahead, implying that data-retention economics—not spaceflight—will dominate the next two centuries.  Observable consequences follow: we should not expect Dyson-scale engineering, but rather compact, low-emission systems.  SETI efforts should thus prioritize searches for anomalous black-hole-like objects or unexpected infrared voids.
 
 Recent JWST rotation asymmetry [6] aligns with the model’s focus on local optimisation.  If the signal reflects cosmic rotation the centripetal trend only strengthens; if it is a Doppler calibration issue, timelines merely rescale (Fig. 2) yet remain finite.
 
-Counter-scenarios—such as near-free data erasure (physically doubtful) or exceptionally efficient sharding—merely shift the timeline.  True stagnation (r ≤ 1) avoids collapse, but such civilizations remain silent by definition.
+Counter-scenarios (for example, near-free data erasure or exceptionally efficient sharding) merely shift the timeline.  True stagnation (r ≤ 1) avoids collapse, but such civilizations remain silent by definition.
 
 ## Verification: Proofs, Code, Reproducibility
 
@@ -123,7 +123,7 @@ Robustness: All parameter variations alter timelines by at most logarithmic fact
 | Massive expansion (N_max × 10¹⁰) | N_max ×10^{10} | 240 | 2265 |
 | Doppler recalibration (N_max × 2) | Distance scale ×2 | 194 | 2219 |
 
-Generated by `get_phi_years.py`; doubling N_max adds ln 2 / ln φ ≈ 1.4427 years (exact script output).
+Generated by `get_phi_years.py`. Doubling N_max adds ln 2 / ln φ ≈ 1.4427 years (exact script output).
 
 ## References
 
