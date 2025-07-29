@@ -1,4 +1,4 @@
-# Why the Sky is Quiet: A Physical Proof for the Great Silence
+# Informational Black Holes: The Physical Resolution to the Fermi Paradox
 
 *Last updated: 28 Jul 2025*
 
