@@ -6,15 +6,20 @@
 
 The Fermi Paradox questions the absence of observable advanced civilizations in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Any progressing civilization (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Illustratively, with current data (181 ZB) and minimal lossless rate (golden ratio φ ≈ 1.618), the threshold hits in ~192 years. Derived mathematically, verified in Lean4, the proof shows silence as physical necessity, not extinction. Model robust to variations, consistent with recent JWST observations.
 
-## Executive Summary: The Core Insight
+## Executive Summary
 
-Advanced civilizations vanish from observation because physics enforces silence. Erasing data costs irreducible energy (Landauer [1–3]); storage hits a finite density limit (Bekenstein [4]). Rational systems grow data exponentially to minimize costs (effective r > 1). 
+**Key idea.** Advanced civilizations disappear from view not by dying out, but by collapsing into ultra-compact, information-dense objects.  Physics itself drives the silence.
 
-This growth crosses finite thresholds, collapsing into black holes: active internally, undetectable externally. For humanity: Illustratively, 192 years from 2025 to singularity. No expansion; Great Silence explained. Proof machine-checked; timelines adjustable via code.
+**Why it is inevitable.**  
+• Erasing information demands energy (Landauer’s principle [1–3]).  
+• Storing information faces a finite surface-area limit (Bekenstein bound [4]).  
+• Any culture with net positive information growth (r > 1) therefore hits that limit in finite time.
+
+**What happens next.** Crossing the bound forces mass-energy to condense; the result is a “computational black hole” — internally active, externally dark.  An illustrative φ-baseline places humanity ~192 years from the threshold, but code lets readers explore any parameters.
 
 ### Quantitative Forecast (Illustrative)
 
-| Scenario | Growth Rate (r) | Time to Singularity (years) | Projected Year |
+| Scenario | Annual Growth (r) | Years Until Singularity | Year Reached |
 |----------|-----------------|-----------------------------|----------------|
 | Conservative (23% annual) | 1.23 | 446 | 2471 |
 | Big-Data (40% annual) | 1.40 | 275 | 2300 |
@@ -23,10 +28,10 @@ This growth crosses finite thresholds, collapsing into black holes: active inter
 The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Python verification: Exact computation confirms 2217 (2025 + ceil(191.8)).
 
 ![Informational Singularity Timeline](viz/growth_curves.png)  
-*Figure 1: Exponential growth curves (log scale) intersecting the Bekenstein bound. φ-curve hits at 2217; others labeled. Generated from model parameters. [Alt: Log y-axis (bits) vs. years; horizontal bound line; colored trajectories with intersection points.]*
+*Figure 1 — Exponential data-growth curves (log-scale) intersect the finite Bekenstein bound.  The φ-trajectory crosses at 2217 CE; conservative and big-data scenarios follow.*
 
 ![Robustness to Boundary Rescaling](viz/robust_recal.png)  
-*Figure 2: Doubling the bound (orange) shifts the intersection rightward by ~1.44 years, preserving finiteness. [Alt: Log-scale plot with blue growth line crossing original (red) and rescaled (orange) bounds.]*
+*Figure 2 — Doubling the information bound delays the intersection by ≈1.44 years; finiteness is unaffected.*
 
 ---
 
@@ -40,7 +45,7 @@ The φ-scenario yields t ≈ 191.8 years; we ceil to 192 for conservatism. Pytho
 
 These facts are non-negotiable constraints on any physical information-handling system.
 
-## Principle Driving the Proof
+## Core Assumption: Why Growth Must Occur
 
 The proof relies on one weak, nearly tautological principle rooted in the definition of progress:
 
@@ -48,13 +53,13 @@ The proof relies on one weak, nearly tautological principle rooted in the defini
 
 This follows from the anthropic context of the Fermi Paradox: We seek "observable" civilizations, implying growth (r > 1); stagnation (r = 1) or regression (r < 1) leads naturally to silence via resource depletion or decay. Opposing P1 значит принять молчание по умолчанию и тем самым закрыть парадокс без дальнейшей физики.
 
-## The Mechanism: From Growth to Singularity
+## Why Informational Growth Leads to Black Holes
 
 Progressing systems (P1) evolve toward exponential information growth to minimize erasure costs (Landauer's principle). Hitting the Bekenstein limit triggers a density crisis: To continue, the system must pack bits at maximal density, requiring mass-energy concentration. This leads to gravitational collapse into a black hole if engineered, or stagnation if not — both silent externally.
 
 The "informational singularity" is a phase transition: Externally, no emissions or expansion; internally, maximal computation efficiency.
 
-### Thermodynamic Justification for Non-Expansion
+### Why Civilizations Don’t Expand Across Space
 
 Why no sharding or interstellar spread? Surface-tension physics provides the analogy.
 
@@ -63,7 +68,7 @@ Why no sharding or interstellar spread? Surface-tension physics provides the ana
 E_sharded ≥ E_central + n d kT ln 2 (for sync traffic). Non-zero d makes sharding strictly more expensive, favoring local centralization. Code: `get_phi_years.py --compare-sharded`.
 
 ![Informational Droplet Analogy](viz/info_droplet.png)  
-*Figure 3: Left — sharded with high surface (costs); right — centralized with minimal surface. [Alt: Scattered small circles vs. one large circle.]*
+*Figure 3 — Sharding increases “informational surface” and dissipation; centralisation minimises it.*
 
 ## The Core Theorem: Finite-Time Singularity
 
