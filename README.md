@@ -4,13 +4,9 @@ This repository contains the article, code, and formal proof for a model that ex
 
 ## Core Idea
 
-The model demonstrates that any civilization driven by efficiency will, by calculation, inevitably vanish behind a physical singularity. The logic is straightforward:
+The repository shows—analytically and formally—that two physical facts (Landauer’s minimum erase cost and the Bekenstein density bound), together with the mild principle “effective information growth r > 1”, force **any** progressing civilisation into a finite-time informational singularity.  Exact timelines depend on parameters; an illustrative baseline (golden-ratio growth) yields ≈192 years.
 
-1.  **Fact:** Erasing data has a real, minimum energy cost (Landauer's principle). Storing it has a physical density limit (the Bekenstein bound). Both are experimentally verified.
-2.  **Rationality:** An advanced AI or economy will always minimize energy expenditure. Thus, it will avoid the perpetual "tax" of deleting data, opting instead for lossless, exponential growth.
-3.  **Calculation:** An exponential function with a growth rate `r > 1` *will* cross a finite limit. Given today's data volume and an optimal growth model, this physical singularity is reached in ≈191 years.
-
-Civilizations don't die out; they optimize themselves into computational black holes—infinitely dense, internally active, but externally silent. This is why the sky is quiet.
+Civilisations thus converge to compact, silent “computational black holes”: internally active, externally mute.  This provides a physics-based resolution of the Great Silence.
 
 ## Contents
 
@@ -28,12 +24,14 @@ Install dependencies (Lean via `elan`, Python 3.10+, `pip install -e .[dev]`) an
 
 ```bash
 # From project root
-lake build                 # formal proofs
-python get_phi_years.py    # prints rows for every scenario
-python viz/generate_plot.py
+lake build                  # formal proofs (Lean)
+python get_phi_years.py     # prints rows for every scenario
+python viz/robust_plot.py   # regenerates robustness figure
+python viz/info_droplet.py  # regenerates droplet schematic
+python viz/generate_plot.py # original growth curves
 ```
 
-The first command verifies Lean proofs; the second emits the exact numbers that appear in the article (both quantitative and sensitivity tables). The plot script regenerates `viz/growth_curves.png`.
+Scripts rebuild all figures used in the article; `get_phi_years.py` reproduces both main and sensitivity tables.
 
 ### Lean Proof Verification
 
