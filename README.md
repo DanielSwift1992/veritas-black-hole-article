@@ -1,4 +1,4 @@
-# Informational Black Holes: The Physical Resolution to the Fermi Paradox
+# Informational Black Holes: A Physical Proof for the Fermi Paradox
 
 This repository contains the article, code, and formal proof for a model that explains the Fermi Paradox ("The Great Silence") through a physical calculation.
 

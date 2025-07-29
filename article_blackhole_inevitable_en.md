@@ -1,4 +1,4 @@
-# Informational Black Holes: The Physical Resolution to the Fermi Paradox
+# Informational Black Holes: A Physical Proof for the Fermi Paradox
 
 *Last updated: 28 Jul 2025*
 
