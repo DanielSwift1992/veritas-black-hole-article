@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import os
 
 # Data
 N0 = 1.448e24
@@ -50,5 +51,8 @@ ax.grid(True, which="both", ls="-", color='#e0e0e0', alpha=0.7)
 fig.tight_layout()
 
 # Save with white background
-plt.savefig('viz/growth_curves.png', transparent=False, bbox_inches='tight')
-print("Plot saved to viz/growth_curves.png") 
+art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
+os.makedirs(art_dir, exist_ok=True)
+out_png = os.path.join(art_dir, 'growth_curves.png')
+plt.savefig(out_png, transparent=False, bbox_inches='tight')
+print(f"Plot saved to {out_png}") 

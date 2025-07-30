@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from pathlib import Path
+import os
 
 fig, ax = plt.subplots(figsize=(6,3))
 ax.set_aspect('equal')
@@ -18,6 +19,8 @@ ax.text(2, -1.6, 'Centralized\n(min surface)',ha='center')
 plt.xlim(-3.5,4)
 plt.ylim(-2,2)
 plt.tight_layout()
-output = Path(__file__).with_name('info_droplet.png')
-plt.savefig(output,dpi=150)
+art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
+os.makedirs(art_dir, exist_ok=True)
+output = Path(art_dir) / 'info_droplet.png'
+plt.savefig(output, dpi=150)
 print(f'Saved {output}')

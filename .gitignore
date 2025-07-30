@@ -1,13 +1,1 @@
-.lake/
 build/
-repo_concat.txt
-*.egg-info/
-__pycache__/
-*.pyc
-*.pyo
-*.tmp
-*.log
-.cache/
-venv/
-.venv/
-.DS_Store

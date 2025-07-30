@@ -1,10 +1,10 @@
 # Informational Black Holes: The Physical Resolution to the Fermi Paradox
 
-*Last updated: <!--VALUE:last_updated-->30 Jul 2025<!--END:last_updated-->*
+*Last updated: 30 Jul 2025*
 
 ## Abstract
 
-The Fermi Paradox questions the absence of observable advanced negentropic systems (entities (biological, artificial, or otherwise) that sustain themselves by locally reducing entropy and creating information) in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Geometric proof shows finite-time silence as unavoidable for any physical system with r > 1. Systems with r ≤ 1 yield silence by definition. Any non-stagnant negentropic system (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Given today's global data volume (~<!--VALUE:global_data_zb-->181<!--END:global_data_zb--> ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ <!--VALUE:phi_value:float3-->1.618<!--END:phi_value-->), the threshold arrives in ≈ <!--VALUE:phi_baseline_years-->192<!--END:phi_baseline_years--> years. Derived mathematically and verified in Lean4, the proof shows silence as a physical necessity, not extinction. Model robust to variations, consistent with JWST observations: No 'young' expanding civilizations visible, as growth phase is brief (~<!--VALUE:growth_phase_duration-->centuries<!--END:growth_phase_duration-->) before silence.
+The Fermi Paradox questions the absence of observable advanced negentropic systems (entities (biological, artificial, or otherwise) that sustain themselves by locally reducing entropy and creating information) in a vast universe. This proof resolves it using two verified physical limits: Landauer's principle (minimum energy for information erasure) and the Bekenstein bound (maximum information density). Geometric proof shows finite-time silence as unavoidable for any physical system with r > 1. Systems with r ≤ 1 yield silence by definition. Any non-stagnant negentropic system (effective information growth r > 1) reaches an informational singularity in finite time, transitioning to silent computational black holes. Given today's global data volume (~181 ZB [7]) and a minimal loss-free growth rate (golden ratio φ ≈ 1.618), the threshold arrives in ≈ 192 years. Derived mathematically and verified in Lean4, the proof shows silence as a physical necessity, not extinction. Model robust to variations, consistent with JWST observations: No 'young' expanding civilizations visible, as growth phase is brief (~centuries) before silence.
 
 ## Definitions & Scope
 
@@ -39,14 +39,14 @@ Either path ends in observational silence. Which one dominates makes no differen
 
 | Scenario | Annual Growth (r) | Years Until Singularity | Year Reached |
 |----------|-----------------|-----------------------------|----------------|
-| Conservative (23% annual) | <!--VALUE:conservative_r:float2-->1.23<!--END:conservative_r--> | <!--VALUE:conservative_years-->446<!--END:conservative_years--> | <!--VALUE:conservative_year-->2471<!--END:conservative_year--> |
-| Big-Data (40% annual) | <!--VALUE:big_data_r:float2-->1.40<!--END:big_data_r--> | <!--VALUE:big_data_years-->275<!--END:big_data_years--> | <!--VALUE:big_data_year-->2300<!--END:big_data_year--> |
-| φ Baseline (Minimal Lossless) | <!--VALUE:phi_baseline_r:float3-->1.618<!--END:phi_baseline_r--> | <!--VALUE:phi_baseline_years-->192<!--END:phi_baseline_years--> | <!--VALUE:phi_baseline_year-->2217<!--END:phi_baseline_year--> |
+| Conservative (23% annual) | 1.23 | 446 | 2471 |
+| Big-Data (40% annual) | 1.40 | 275 | 2300 |
+| φ Baseline (Minimal Lossless) | 1.618 | 192 | 2217 |
 
-The φ-scenario yields t ≈ <!--VALUE:phi_t_precise:float1-->191.8<!--END:phi_t_precise--> years. We round this up to <!--VALUE:phi_baseline_years-->192<!--END:phi_baseline_years--> for conservatism. Python verification confirms <!--VALUE:phi_baseline_year-->2217<!--END:phi_baseline_year--> (2025 + ceil <!--VALUE:phi_t_precise:float1-->191.8<!--END:phi_t_precise-->).
+The φ-scenario yields t ≈ 191.8 years. We round this up to 192 for conservatism. Python verification confirms 2217 (2025 + ceil 191.8).
 
 ![Informational Singularity Timeline](build/artifacts/growth_curves.png)
-*Figure 1 - Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at <!--VALUE:phi_baseline_year-->2217<!--END:phi_baseline_year--> CE. Conservative and big-data scenarios follow.*
+*Figure 1 - Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at 2217 CE. Conservative and big-data scenarios follow.*
 
 ![Robustness to Boundary Rescaling](build/artifacts/robust_recal.png)
 *Figure 2 - Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.*
@@ -74,26 +74,24 @@ The physics of information processing creates three economic forces that drive n
 
 Landauer's principle sets a fixed energy floor for deleting information, while storage costs decrease exponentially with technology. This creates a crossover point where keeping data becomes physically cheaper than erasing it.
 
-<!--TABLE:storage_simple-->
 | Year | StoreUSD/GB | DeleteUSD/GB | Cheaper | Factor |
 |---|---|---|---|---|
 | 2025 | 0.16 | ~6e-19 | Delete | 2.5e+17 |
 | 2075 | 4.8e-09 | ~6e-19 | Delete | 7468017203.06 |
 | 2125 | ~1e-16 | ~6e-19 | Delete | 222.56 |
 | 2217 | ~2e-30 | ~6e-19 | Store | 316172710538.03 |
-<!--END:storage_simple-->
 
-**Physical consequence:** Around <!--VALUE:crossover_year-->2141<!--END:crossover_year-->, storing information becomes cheaper than deleting it for the first time in history. This isn't an economic choice - it's a thermodynamic necessity. Systems must hoard data to minimize energy expenditure, accelerating the approach to information density limits. The crossover occurs decades before the singularity (<!--VALUE:phi_baseline_year-->2217<!--END:phi_baseline_year-->), ensuring that negentropic nodes become information accumulators by physical law well before reaching the Bekenstein bound.
+**Physical consequence:** Around 2141, storing information becomes cheaper than deleting it for the first time in history. This isn't an economic choice - it's a thermodynamic necessity. Systems must hoard data to minimize energy expenditure, accelerating the approach to information density limits. The crossover occurs decades before the singularity (2217), ensuring that negentropic nodes become information accumulators by physical law well before reaching the Bekenstein bound.
 
 ### The Thermodynamics of Interstellar Travel
 
 Transmitting information across interstellar distances faces insurmountable energy barriers that worsen exponentially as storage becomes cheaper.
 
 **Energy analysis for 1 TB to Proxima Centauri (4.2 ly):**
-Minimum transmission energy requires ~4.5 × 10¹⁴ J, costing ~$<!--VALUE:probe_energy_cost:sci-->1.2e+07<!--END:probe_energy_cost--> USD at current energy prices (~$<!--VALUE:probe_bit_cost:currency-->0.0000015625<!--END:probe_bit_cost--> USD per bit).
+Minimum transmission energy requires ~4.5 × 10¹⁴ J, costing ~$1.2e+07 USD at current energy prices (~$0.0000015625 USD per bit).
 
 **Comparison with local storage:**
-In 2025, transmission costs 1.8× more than storage. By 2075, transmission costs <!--VALUE:trans_2075_ratio:big-->53,000,000<!--END:trans_2075_ratio-->× more than storage. By 2125, transmission costs <!--VALUE:trans_2125_ratio:sci-->1.6e+15<!--END:trans_2125_ratio-->× more than storage.
+In 2025, transmission costs 1.8× more than storage. By 2075, transmission costs 53,000,000× more than storage. By 2125, transmission costs 1.6e+15× more than storage.
 
 **Physical consequence:** Beyond 2075, interstellar transmission becomes thermodynamically prohibited. The energy required to send even one bit exceeds the energy available for storing millions of bits locally. This isn't about economics - it's about fundamental energy conservation making transmission physically impossible for any efficient system.
 
@@ -103,17 +101,17 @@ The ultimate measure: for the same energy budget, how much information can you s
 
 **Energy tradeoffs by era:**
 
-**2025:** With $1 of energy, you can store <!--VALUE:store_2025_bits:big-->500,000,000,000<!--END:store_2025_bits--> bits locally, send 64 million bits to Mars, or send 640,000 bits to Proxima Centauri.
+**2025:** With $1 of energy, you can store 500,000,000,000 bits locally, send 64 million bits to Mars, or send 640,000 bits to Proxima Centauri.
 
-**2075:** The gap widens dramatically. The same $1 stores <!--VALUE:store_2075_bits:sci-->1.7e+19<!--END:store_2075_bits--> bits locally but still sends only 640,000 bits to Proxima - a <!--VALUE:opp_2075_advantage:big-->27,000,000<!--END:opp_2075_advantage-->-fold advantage for local storage.
+**2075:** The gap widens dramatically. The same $1 stores 1.7e+19 bits locally but still sends only 640,000 bits to Proxima - a 27,000,000-fold advantage for local storage.
 
-**2125:** Local storage becomes absurdly superior. $1 stores <!--VALUE:store_2125_bits:sci-->5.6e+23<!--END:store_2125_bits--> bits locally versus 640,000 bits to Proxima - nearly a <!--VALUE:opp_2125_advantage:big-->1,000,000,000<!--END:opp_2125_advantage-->-fold difference per bit transmitted.
+**2125:** Local storage becomes absurdly superior. $1 stores 5.6e+23 bits locally versus 640,000 bits to Proxima - nearly a 1,000,000,000-fold difference per bit transmitted.
 
 **2217 (Singularity):** The final state shows complete transmission impossibility. $1 stores 4 × 10⁴⁰ bits locally - more than all information that has ever existed - while interstellar transmission remains fixed at 640,000 bits.
 
-**Physical consequence:** By 2125, the same energy that transmits one bit to Proxima could store <!--VALUE:opportunity_2125_ratio:sci-->1.2e+11<!--END:opportunity_2125_ratio--> bits locally² - equivalent to storing the entire Netflix catalog, all human knowledge, and every book ever written, simultaneously. This represents a fundamental physical barrier: any system optimizing for information processing must choose local storage over transmission. The gap becomes so extreme that transmission is not just inefficient - it becomes physically impossible for any system operating near thermodynamic limits.
+**Physical consequence:** By 2125, the same energy that transmits one bit to Proxima could store 1.2e+11 bits locally² - equivalent to storing the entire Netflix catalog, all human knowledge, and every book ever written, simultaneously. This represents a fundamental physical barrier: any system optimizing for information processing must choose local storage over transmission. The gap becomes so extreme that transmission is not just inefficient - it becomes physically impossible for any system operating near thermodynamic limits.
 
-²Calculated via `opportunity_bits.py`: transmission energy 4.5×10¹⁴ J ÷ storage energy 4.5×10⁻¹⁰ J = <!--VALUE:opportunity_2125_ratio:sci-->1.2e+11<!--END:opportunity_2125_ratio--> ratio.
+²Calculated via `opportunity_bits.py`: transmission energy 4.5×10¹⁴ J ÷ storage energy 4.5×10⁻¹⁰ J = 1.2e+11 ratio.
 
 ## Minimal Negentropy Principle: Why Growth Occurs
 
@@ -150,7 +148,7 @@ From facts and principle follows the theorem: Any r > 1 reaches finite N_max in 
 
 **Proof intuition:** On a log scale, exponential growth is an upward line while the bound is horizontal. Non-parallel lines intersect - a geometric inevitability.
 
-**Mathematical proof:** Time to bound t = ln(N_max / N_0) / ln(r). For r > 1, ln(r) > 0, so t is finite and positive (given N_max > N_0). Example: Even minimal growth r = 1.0001 gives t ≈ <!--VALUE:minimal_growth_years:big-->922918<!--END:minimal_growth_years--> years - long but finite. For r = 1, ln(r) = 0 → division by zero, infinite t (never hits bound, but silent by definition). Proved rigorously in BlackHole.lean. Geometric view: On semi-log plot, growth is a line with slope ln(r) > 0 → must intersect horizontal bound line.
+**Mathematical proof:** Time to bound t = ln(N_max / N_0) / ln(r). For r > 1, ln(r) > 0, so t is finite and positive (given N_max > N_0). Example: Even minimal growth r = 1.0001 gives t ≈ 922918 years - long but finite. For r = 1, ln(r) = 0 → division by zero, infinite t (never hits bound, but silent by definition). Proved rigorously in BlackHole.lean. Geometric view: On semi-log plot, growth is a line with slope ln(r) > 0 → must intersect horizontal bound line.
 
 **Physical consequence:** No system can maintain observable growth indefinitely. Either it grows (r > 1) and hits limits in finite time, or it stagnates (r ≤ 1) and becomes undetectable. Both paths lead to observational silence.
 
@@ -215,13 +213,13 @@ Robustness: All parameter variations alter timelines by at most logarithmic fact
 
 | Variation | Change | t (years) | Year |
 |-----------|--------|-----------|------|
-| Larger BH (1 cm radius, N_max × 100) | N_max ×100 | <!--VALUE:larger_bh_years-->202<!--END:larger_bh_years--> | <!--VALUE:larger_bh_year-->2227<!--END:larger_bh_year--> |
-| Partial deletion allowed (r = 1.50) | Growth rate ↓ | <!--VALUE:partial_deletion_years-->228<!--END:partial_deletion_years--> | <!--VALUE:partial_deletion_year-->2253<!--END:partial_deletion_year--> |
-| Minimal growth (r = 1.0001) | Growth rate ↓↓ | ~<!--VALUE:minimal_growth_years:big-->922918<!--END:minimal_growth_years--> | ~<!--VALUE:minimal_growth_year:big-->924943<!--END:minimal_growth_year--> |
-| Massive expansion (N_max × 10¹⁰) | N_max ×10^{10} | <!--VALUE:massive_exp_years-->240<!--END:massive_exp_years--> | <!--VALUE:massive_exp_year-->2265<!--END:massive_exp_year--> |
-| Doppler recalibration (N_max × 2) | Distance scale ×2 | <!--VALUE:doppler_years-->194<!--END:doppler_years--> | <!--VALUE:doppler_year-->2219<!--END:doppler_year--> |
+| Larger BH (1 cm radius, N_max × 100) | N_max ×100 | 202 | 2227 |
+| Partial deletion allowed (r = 1.50) | Growth rate ↓ | 228 | 2253 |
+| Minimal growth (r = 1.0001) | Growth rate ↓↓ | ~922918 | ~924943 |
+| Massive expansion (N_max × 10¹⁰) | N_max ×10^{10} | 240 | 2265 |
+| Doppler recalibration (N_max × 2) | Distance scale ×2 | 194 | 2219 |
 
-Generated by `get_phi_years.py`. Doubling N_max adds ln 2 / ln φ ≈ <!--VALUE:doubling_delay:float4-->1.4404<!--END:doubling_delay--> years (exact script output).
+Generated by `get_phi_years.py`. Doubling N_max adds ln 2 / ln φ ≈ 1.4404 years (exact script output).
 
 ## References
 

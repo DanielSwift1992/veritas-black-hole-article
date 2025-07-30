@@ -11,9 +11,9 @@ START_YEAR_DEFAULT = 2025
 
 SCENARIOS: Dict[str, Tuple[float, float]] = {
     # label: (growth rate r, multiplier on N_max)
+    "φ Baseline": ((1 + math.sqrt(5)) / 2, 1),  # Minimal lossless baseline
     "Conservative": (1.23, 1),
     "Big-Data": (1.40, 1),
-    "φ Baseline": ((1 + math.sqrt(5)) / 2, 1),
     # Sensitivity variations
     "Larger BH": ((1 + math.sqrt(5)) / 2, 100),  # 1 cm radius → N_max ×100
     "Partial deletion allowed": (1.50, 1),
@@ -91,9 +91,10 @@ def main() -> None:
         json.dump(data, sys.stdout, indent=2)
     else:
         writer = csv.writer(sys.stdout)
-        writer.writerow(["Scenario", "r", "Years", "Year"])
+        writer.writerow(["Scenario", "Years", "Year", "r"])
         for row in rows:
-            writer.writerow(row)
+            name, r_val, yrs, yr = row
+            writer.writerow([name, yrs, yr, f"{r_val:.3f}"])
 
 
 if __name__ == "__main__":

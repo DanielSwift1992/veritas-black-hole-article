@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 from pathlib import Path
+import os
 
 N0 = 1.448e24
 N_MAX = 1.74e64
@@ -27,6 +28,8 @@ plt.ylabel('Bits stored')
 plt.title('Robustness to distance rescaling')
 plt.legend()
 plt.tight_layout()
-output = Path(__file__).with_name('robust_recal.png')
+art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
+os.makedirs(art_dir, exist_ok=True)
+output = Path(art_dir) / 'robust_recal.png'
 plt.savefig(output, dpi=150)
 print(f'Saved {output}')

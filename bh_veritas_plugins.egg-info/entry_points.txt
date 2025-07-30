@@ -1,0 +1,10 @@
+[veritas_plugins]
+article_table_check = plugins.bh_veritas_plugins.checks:ArticleTableCheck
+bh_lean_proof_check = plugins.bh_veritas_plugins.checks:LeanProofCheck
+bh_python_timeline_check = plugins.bh_veritas_plugins.checks:PythonTimelineCheck
+centralization_energy_check = plugins.bh_veritas_plugins.checks:CentralizationEnergyCheck
+droplet_png_check = plugins.bh_veritas_plugins.checks:droplet_png_check
+growth_curve_png_check = plugins.bh_veritas_plugins.checks:growth_curve_png_check
+probe_table_check = plugins.bh_veritas_plugins.checks:ProbeTableCheck
+robust_png_check = plugins.bh_veritas_plugins.checks:robust_png_check
+storage_table_check = plugins.bh_veritas_plugins.checks:StorageTableCheck

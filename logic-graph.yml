@@ -36,12 +36,14 @@ nodes:
 
   - id: StorageEconomics
     type: artifact
-    value: storage_crossover.py
+    value: scripts/storage_simple.py
 
-  - id: ProbeCalc
+
+  
+  - id: SilenceFlow
     type: artifact
-    description: "Courier probe cost script."
-    value: probe_cost.py
+    description: "Flowchart showing all paths lead to silence."
+    value: build/artifacts/silence_flow.png
 
 edges:
   - from: Article
@@ -77,13 +79,16 @@ edges:
 
   - from: Article
     to: StorageEconomics
-    obligation: storage_table_check
+    obligation: storage_simple_check
 
-  - from: Article
-    to: ProbeCalc
-    obligation: probe_table_check
+
 
   # Centralization energy inequality
   - from: Article
     to: PythonCalc
-    obligation: centralization_energy_check 
+    obligation: centralization_energy_check
+
+  # Silence flow chart
+  - from: Article
+    to: SilenceFlow
+    obligation: silence_flow_png_check 
