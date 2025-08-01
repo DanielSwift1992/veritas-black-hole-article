@@ -1,5 +1,0 @@
-[veritas_plugins]
-article_table_check = bh_veritas_plugins.checks:ArticleTableCheck
-bh_lean_proof_check = bh_veritas_plugins.checks:LeanProofCheck
-bh_python_timeline_check = bh_veritas_plugins.checks:PythonTimelineCheck
-growth_curve_png_check = bh_veritas_plugins.checks:GrowthCurvePngCheck
