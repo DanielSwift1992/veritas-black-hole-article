@@ -107,7 +107,7 @@ The ultimate measure: for the same energy budget, how much information can you s
 
 **2125:** Local storage becomes absurdly superior. $1 stores 5.6e+23 bits locally versus 640000 bits to Proxima - nearly a 1,000,000,000-fold difference per bit transmitted.
 
-**2217 (Singularity):** The final state shows complete transmission impossibility. $1 stores 4 × 10⁴⁰ bits locally - more than all information that has ever existed - while interstellar transmission remains fixed at 640000 bits.
+**2217 (Singularity):** The final state shows complete transmission impossibility. $1 stores 4 × 10^{40} bits locally - more than all information that has ever existed - while interstellar transmission remains fixed at 640000 bits.
 
 **Physical consequence:** By 2125, the same energy that transmits one bit to Proxima could store 1.2e+11 bits locally. This represents a fundamental physical barrier making transmission physically impossible for any system operating near thermodynamic limits.
 
