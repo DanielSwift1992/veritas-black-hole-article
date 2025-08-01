@@ -1,0 +1,44 @@
+[
+  {
+    "label": "\u03c6 Baseline",
+    "r": 1.618033988749895,
+    "years": 192,
+    "year": 2217
+  },
+  {
+    "label": "Conservative",
+    "r": 1.23,
+    "years": 446,
+    "year": 2471
+  },
+  {
+    "label": "Big-Data",
+    "r": 1.4,
+    "years": 275,
+    "year": 2300
+  },
+  {
+    "label": "Larger BH",
+    "r": 1.618033988749895,
+    "years": 202,
+    "year": 2227
+  },
+  {
+    "label": "Partial deletion allowed",
+    "r": 1.5,
+    "years": 228,
+    "year": 2253
+  },
+  {
+    "label": "Massive expansion",
+    "r": 1.618033988749895,
+    "years": 240,
+    "year": 2265
+  },
+  {
+    "label": "Doppler recalibration",
+    "r": 1.618033988749895,
+    "years": 194,
+    "year": 2219
+  }
+]

@@ -1,0 +1,2 @@
+distance_m,mass_kg,v_frac_c,payload_bits,E_k_J,Cost_USD,Cost_USD_per_bit
+4e+16,1.0,0.1,8000000000000.0,4.494e+14,1.248e+07,1.560e-06,5.617e+01,8.205e-11,1.026e-23
