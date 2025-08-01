@@ -117,6 +117,18 @@ def calculate_all_values():
     # Current date
     values['last_updated'] = datetime.now().strftime("%d %b %Y")
     
+    # Repository links
+    repo_base = "https://github.com/DanielSwift1992/veritas-black-hole-article"
+    values['repo_url'] = repo_base
+    values['lean_proof_url'] = f"{repo_base}/blob/main/LeanBh/BlackHole.lean"
+    values['phi_script_url'] = f"{repo_base}/blob/main/scripts/get_phi_years.py"
+    values['opportunity_script_url'] = f"{repo_base}/blob/main/scripts/opportunity_bits.py"
+    values['repo_short'] = "github.com/DanielSwift1992/veritas-black-hole-article"
+    
+    # Short display names for links
+    values['lean_link_text'] = "BlackHole.lean"
+    values['phi_link_text'] = "get_phi_years.py"
+    
     # Global data volume
     values['global_data_zb'] = 181
     values['n_0_bits'] = N_0
@@ -124,6 +136,7 @@ def calculate_all_values():
     values['phi_value'] = phi
     
     # Comparison ratios (calculated dynamically)
+    values['trans_2025_ratio'] = 1.8
     values['transmission_vs_storage_2025'] = 1.8
     values['transmission_vs_storage_2075'] = 53e6
     values['transmission_vs_storage_2125'] = 1.6e15
@@ -153,11 +166,13 @@ def calculate_all_values():
     # Average growth phase (years)
     growth_phase_avg = round((446 + 275 + 192) / 3)  # Conservative, Big-Data, φ
     values['growth_phase_avg'] = growth_phase_avg
+    values['growth_avg_years'] = growth_phase_avg
     
     # Opportunity cost examples (simplified)
     values['store_2025_billion_bits'] = 500
     values['mars_2025_million_bits'] = 64
     values['proxima_2025_thousand_bits'] = 640
+    values['prox_send_bits'] = 640000  # Bits you can send to Proxima for $1
     
     # Probe energy calculations
     probe_energy_J = 4.5e14  # Energy for 1TB to Proxima

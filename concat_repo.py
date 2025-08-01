@@ -36,7 +36,7 @@ INCLUDE_DIRS = [
     ("plugins", ".py"),
 ]
 
-EXCLUDE_DIRS = {".git", ".lake", "__pycache__", ".venv", "venv", "build", "dist", "node_modules", "bh_veritas_plugins.egg-info", "src", "viz"}
+EXCLUDE_DIRS = {".git", ".lake", "__pycache__", ".venv", "venv", "build", "dist", "node_modules", "bh_veritas_plugins.egg-info", "src"}
 
 OUT_FILE = "repo_concat.txt"
 MAX_BYTES = 200_000
