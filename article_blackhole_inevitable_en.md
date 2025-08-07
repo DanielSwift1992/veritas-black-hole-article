@@ -57,7 +57,7 @@ The φ-scenario yields t ≈ <!--VALUE:phi_t_precise:float1-->191.8<!--END:phi_t
 *Figure 3 - Regardless of growth rate, every pathway culminates in observational silence.*
 
 ![Sensitivity of t(r)](build/artifacts/sensitivity_tr.png)
-*Figure 4 - Time-to-threshold stretches logarithmically as r → 1⁺; finiteness remains.*
+*Figure 4 - Time-to-threshold stretches logarithmically as r → 1^+; finiteness remains.*
 
 ---
 

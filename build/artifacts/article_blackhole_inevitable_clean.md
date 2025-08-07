@@ -55,7 +55,7 @@ The φ-scenario yields t ≈ 191.8 years. We round this up to 192 for conservati
 *Figure 3 - Regardless of growth rate, every pathway culminates in observational silence.*
 
 ![Sensitivity of t(r)](build/artifacts/sensitivity_tr.png)
-*Figure 4 - Time-to-threshold stretches logarithmically as r → 1⁺; finiteness remains.*
+*Figure 4 - Time-to-threshold stretches logarithmically as r → 1^+; finiteness remains.*
 
 ---
 

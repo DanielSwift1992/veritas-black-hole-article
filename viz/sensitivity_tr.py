@@ -15,7 +15,7 @@ N_MAX = 1.74e64
 
 def main() -> None:
     plt.style.use('seaborn-v0_8-whitegrid')
-    fig, ax = plt.subplots(figsize=(10, 6), dpi=120)
+    fig, ax = plt.subplots(figsize=(11, 6), dpi=140)
 
     r_vals = np.concatenate([
         np.linspace(1.0001, 1.01, 200),
@@ -24,13 +24,29 @@ def main() -> None:
     ])
     t_vals = np.log(N_MAX / N0) / np.log(r_vals)
 
-    ax.plot(r_vals, t_vals, color="#1f77b4", linewidth=2.2)
-    ax.set_xlabel("Growth factor r", fontsize=13)
-    ax.set_ylabel("Years to threshold t(r)", fontsize=13)
-    ax.set_title("Sensitivity of time-to-bound t(r) as r → 1⁺", fontsize=16, pad=12)
+    ax.plot(r_vals, t_vals, color="#1f77b4", linewidth=2.4, label=r"$t(r)=\ln(N_{max}/N_0)/\ln r$")
+
+    # Annotate key scenarios
+    marks = {
+        "23%": 1.23,
+        "40%": 1.40,
+        r"$\varphi$": (1 + math.sqrt(5)) / 2,
+    }
+    for label, rv in marks.items():
+        tv = math.log(N_MAX / N0) / math.log(rv)
+        ax.plot([rv], [tv], marker="o", color="#d62728", ms=6)
+        ax.annotate(f"{label}: {int(round(tv))}",
+                    xy=(rv, tv), xytext=(rv+0.02, tv*1.2),
+                    textcoords='data', fontsize=10, color="#d62728",
+                    arrowprops=dict(arrowstyle="->", color="#d62728", lw=1.0))
+
+    ax.set_xlabel(r"Growth factor $r$", fontsize=13)
+    ax.set_ylabel(r"Years to threshold $t(r)$ (log scale)", fontsize=13)
+    ax.set_title(r"Sensitivity of time-to-bound $t(r)$ as $r\to 1^+$", fontsize=16, pad=12)
     ax.set_xlim(1.0001, 1.8)
-    ax.set_ylim(0, min(1.1*max(t_vals), 1.1*t_vals[-1]))
+    ax.set_yscale('log')
     ax.grid(True, which="both", ls="-", color="#e0e0e0", alpha=0.7)
+    ax.legend(frameon=True, fontsize=10, loc='upper right')
     fig.tight_layout()
 
     out_dir = os.getenv("BH_ARTIFACT_DIR", "build/artifacts")
