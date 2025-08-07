@@ -163,6 +163,7 @@ robust_png_check = _png_check("robust_png_check", "build/artifacts/robust_recal.
 droplet_png_check = _png_check("droplet_png_check", "build/artifacts/info_droplet.png", "viz/info_droplet.py")
 growth_curve_png_check = _png_check("growth_curve_png_check", "build/artifacts/growth_curves.png", "viz/generate_plot.py")
 silence_flow_png_check = _png_check("silence_flow_png_check", "build/artifacts/silence_flow.png", "viz/silence_flow.py")
+sens_tr_png_check = _png_check("sens_tr_png_check", "build/artifacts/sensitivity_tr.png", "viz/sensitivity_tr.py")
 
 @plugin("article_table_check")
 class ArticleTableCheck(BaseCheck):

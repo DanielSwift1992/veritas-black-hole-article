@@ -45,6 +45,11 @@ nodes:
     description: "Flowchart showing all paths lead to silence."
     value: build/artifacts/silence_flow.png
 
+  - id: SensitivityTR
+    type: artifact
+    description: "Sensitivity of t(r) as r → 1+."
+    value: build/artifacts/sensitivity_tr.png
+
   - id: CleanMarkdown
     type: artifact
     description: "Clean markdown version without Veritas tags."
@@ -99,10 +104,18 @@ edges:
     to: SilenceFlow
     obligation: bh_generate_silence_flow
 
+  - from: CleanArtifacts
+    to: SensitivityTR
+    obligation: bh_generate_sensitivity_plot
+
   # Check plots exist after generation
   - from: GrowthPlot
     to: PythonCalc
     obligation: growth_curve_png_check
+
+  - from: SensitivityTR
+    to: PythonCalc
+    obligation: sens_tr_png_check
 
   # Verify that all quantitative and sensitivity tables match code
   - from: Article

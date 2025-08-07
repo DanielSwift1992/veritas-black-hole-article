@@ -92,3 +92,23 @@ class GenerateSilenceFlow(BaseCheck):
             return CheckResult.failed(f"Silence flow generation failed: {e.stderr}")
         except Exception as e:
             return CheckResult.failed(f"Error generating silence flow: {e}")
+
+
+@plugin("bh_generate_sensitivity_plot")
+class GenerateSensitivityPlot(BaseCheck):
+    """Generate sensitivity plot t(r) as r → 1⁺."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = artifact
+        script_path = repo_root / "viz" / "sensitivity_tr.py"
+        if not script_path.exists():
+            return CheckResult.failed(f"Script not found: {script_path}")
+        try:
+            result = subprocess.run([sys.executable, str(script_path)],
+                                    capture_output=True, text=True, check=True,
+                                    cwd=repo_root, timeout=30)
+            return CheckResult.passed("Sensitivity plot generated successfully")
+        except subprocess.CalledProcessError as e:
+            return CheckResult.failed(f"Sensitivity plot generation failed: {e.stderr}")
+        except Exception as e:
+            return CheckResult.failed(f"Error generating sensitivity plot: {e}")

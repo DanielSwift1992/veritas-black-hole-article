@@ -56,6 +56,9 @@ The φ-scenario yields t ≈ <!--VALUE:phi_t_precise:float1-->191.8<!--END:phi_t
 ![All Paths Lead to Silence](build/artifacts/silence_flow.png)
 *Figure 3 - Regardless of growth rate, every pathway culminates in observational silence.*
 
+![Sensitivity of t(r)](build/artifacts/sensitivity_tr.png)
+*Figure 4 - Time-to-threshold stretches logarithmically as r → 1⁺; finiteness remains.*
+
 ---
 
 ## Key Physical Facts
@@ -142,7 +145,7 @@ $E_{\text{sharded}} \geq E_{\text{central}} + n d kT \ln 2$ (for sync traffic). 
 **Unsynced sharding objection:** Even without synchronization, sharding creates independent nodes, each inheriting r > 1 and hitting the Bekenstein bound independently, becoming silent mini-black-holes. No coherent galactic expansion - signals from rare probes drown in cosmic noise (e.g., pencil-beams undetectable beyond ~10 ly). Von Neumann probes become energetically unfavorable by ~2075 even with optimistic technological improvements (per Information Economics). If launched earlier, their signals are too weak and noisy for detection across interstellar distances.
 
 ![Informational Droplet Analogy](build/artifacts/info_droplet.png)
-*Figure 4 - Sharding increases "informational surface" and dissipation. Centralisation minimises it.*
+*Figure 5 - Sharding increases "informational surface" and dissipation. Centralisation minimises it.*
 
 ## The Core Theorem: Finite-Time Singularity
 

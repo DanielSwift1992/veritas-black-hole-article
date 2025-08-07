@@ -24,6 +24,8 @@ setup(
             'bh_generate_robust_plot = plugins.bh_veritas_plugins.visualizations:GenerateRobustPlot',
             'bh_generate_droplet_plot = plugins.bh_veritas_plugins.visualizations:GenerateDropletPlot',
             'bh_generate_silence_flow = plugins.bh_veritas_plugins.visualizations:GenerateSilenceFlow',
+            'bh_generate_sensitivity_plot = plugins.bh_veritas_plugins.visualizations:GenerateSensitivityPlot',
+            'sens_tr_png_check = plugins.bh_veritas_plugins.checks:sens_tr_png_check',
             'values_resolved_check = plugins.bh_veritas_plugins.checks:ValuesResolvedCheck',
             'clean_markdown_no_tags_check = plugins.bh_veritas_plugins.checks:CleanMarkdownNoTagsCheck',
             'storage_simple_content_check = plugins.bh_veritas_plugins.checks:StorageSimpleContentCheck',
