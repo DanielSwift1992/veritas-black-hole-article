@@ -404,3 +404,177 @@ class ProbeTableCheck(BaseCheck):
                 else:
                     return CheckResult.failed(f"Mismatch: article {val:.1e} vs script {expected_cost:.1e}")
         return CheckResult.failed("Probe table row not found in article") 
+
+# ---------------------------------------------------------------------------
+# Deterministic value resolution checks
+# ---------------------------------------------------------------------------
+
+
+def _format_value_for_tag(value, format_type: str | None) -> str:
+    if format_type is None:
+        return str(value)
+    if isinstance(value, str):
+        return value
+    if format_type == "int":
+        return str(int(value))
+    if format_type == "year":
+        return str(int(value))
+    if format_type == "float1":
+        return f"{value:.1f}"
+    if format_type == "float2":
+        return f"{value:.2f}"
+    if format_type == "float3":
+        return f"{value:.3f}"
+    if format_type == "float4":
+        return f"{value:.4f}"
+    if format_type == "sci":
+        return f"{value:.1e}"
+    if format_type == "big":
+        try:
+            v = float(value)
+        except Exception:
+            return str(value)
+        if v >= 1e6:
+            return f"{v:,.0f}"
+        return str(int(v))
+    if format_type == "currency":
+        v = float(value)
+        if v >= 1:
+            return f"{v:.2f}"
+        if v >= 1e-9:
+            return f"{v:.10f}".rstrip('0').rstrip('.')
+        return f"~{v:.0e}"
+    return str(value)
+
+
+@plugin("values_resolved_check")
+class ValuesResolvedCheck(BaseCheck):
+    """Verify that every <!--VALUE:...-->...<!--END:...--> tag contains the
+    correctly formatted value from build/artifacts/calculated_values.json.
+    This ensures deterministic substitution prior to clean-markdown/pdf.
+    """
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        values_path = repo_root / "build" / "artifacts" / "calculated_values.json"
+        if not article.exists():
+            return CheckResult.failed("Article not found")
+        if not values_path.exists():
+            return CheckResult.failed("calculated_values.json not found – run bh_markdown_fill first")
+
+        import json, re
+        data = json.loads(values_path.read_text(encoding="utf-8"))
+        text = article.read_text(encoding="utf-8")
+        pattern = re.compile(r"<!--VALUE:([^>]+)-->([^<]*)<!--END:[^>]+-->")
+        failures: list[str] = []
+        for m in pattern.finditer(text):
+            tag_content = m.group(1)
+            current = (m.group(2) or "").strip()
+            if ":" in tag_content:
+                key, fmt = tag_content.split(":", 1)
+            else:
+                key, fmt = tag_content, None
+            if key not in data:
+                failures.append(f"Missing value for {key}")
+                continue
+            expected = _format_value_for_tag(data[key], fmt)
+            if current != expected:
+                failures.append(f"{key}: '{current}' != expected '{expected}'")
+        if failures:
+            return CheckResult.failed("Unresolved or incorrect VALUE tags:\n" + "\n".join(failures))
+        return CheckResult.passed("All VALUE tags match calculated values")
+
+
+@plugin("clean_markdown_no_tags_check")
+class CleanMarkdownNoTagsCheck(BaseCheck):
+    """Ensure clean markdown has no Veritas comment tags left."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        clean_md = repo_root / "build" / "artifacts" / "article_blackhole_inevitable_clean.md"
+        if not clean_md.exists():
+            return CheckResult.failed("Clean markdown not found – run bh_clean_markdown_compile first")
+        txt = clean_md.read_text(encoding="utf-8")
+        if "<!--VALUE:" in txt or "<!--TABLE:" in txt:
+            return CheckResult.failed("Veritas tags found in clean markdown")
+        return CheckResult.passed("Clean markdown contains no Veritas tags")
+
+
+@plugin("storage_simple_content_check")
+class StorageSimpleContentCheck(BaseCheck):
+    """Validate that the storage_simple table in article exactly matches
+    the CSV produced by scripts/storage_simple.py --csv."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        import csv, sys, subprocess, re
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        script = repo_root / "scripts" / "storage_simple.py"
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not script.exists() or not article.exists():
+            return CheckResult.failed("storage_simple.py or article missing")
+        try:
+            proc = subprocess.run([sys.executable, str(script), "--csv"], capture_output=True, text=True, check=True)
+        except Exception as e:
+            return CheckResult.failed(f"storage_simple.py failed: {e}")
+        csv_lines = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip()]
+        reader = csv.reader(csv_lines)
+        rows = list(reader)
+        # Extract markdown table block
+        txt = article.read_text(encoding="utf-8")
+        m = re.search(r"<!--TABLE:storage_simple-->([\s\S]*?)<!--END:storage_simple-->", txt)
+        if not m:
+            return CheckResult.failed("storage_simple table block not found in article")
+        md_block = [ln.strip() for ln in m.group(1).strip().splitlines() if ln.strip()]
+        # Reconstruct expected markdown table
+        hdr = rows[0]
+        body = rows[1:]
+        bar = "|" + "---|" * len(hdr)
+        def to_row(r):
+            return "| " + " | ".join(r) + " |"
+        expected_lines = [to_row(hdr), bar] + [to_row(r) for r in body]
+        if md_block != expected_lines:
+            diffs = []
+            for i, (a, b) in enumerate(zip(md_block, expected_lines)):
+                if a != b:
+                    diffs.append(f"line {i+1}: article='{a}' expected='{b}'")
+            if len(md_block) != len(expected_lines):
+                diffs.append(f"line count: article={len(md_block)} expected={len(expected_lines)}")
+            return CheckResult.failed("storage_simple table mismatch:\n" + "\n".join(diffs[:20]))
+        return CheckResult.passed("storage_simple table matches script output")
+
+
+@plugin("values_consistency_check")
+class ValuesConsistencyCheck(BaseCheck):
+    """Check basic invariants inside calculated_values.json for self-consistency.
+
+    - doubling_delay ≈ ln(2)/ln(phi_value)
+    - phi_baseline_year = 2025 + ceil(phi_t_precise)
+    """
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        import json, math
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        p = repo_root / "build" / "artifacts" / "calculated_values.json"
+        if not p.exists():
+            return CheckResult.failed("calculated_values.json not found – run bh_markdown_fill first")
+        vals = json.loads(p.read_text(encoding="utf-8"))
+        fails: list[str] = []
+        try:
+            phi = float(vals["phi_value"]) if "phi_value" in vals else (1 + 5 ** 0.5) / 2
+            dbl = float(vals.get("doubling_delay", 0.0))
+            expect = math.log(2) / math.log(phi)
+            if abs(dbl - expect) > 0.02:
+                fails.append(f"doubling_delay {dbl:.2f} vs expected {expect:.2f}")
+        except Exception:
+            fails.append("could not check doubling_delay")
+        try:
+            t_prec = float(vals.get("phi_t_precise", 191.8))
+            y = int(vals.get("phi_baseline_year", 2217))
+            if y != 2025 + math.ceil(t_prec):
+                fails.append(f"phi_baseline_year {y} vs 2025+ceil({t_prec})")
+        except Exception:
+            fails.append("could not check phi_baseline_year")
+        if fails:
+            return CheckResult.failed("Value consistency errors:\n" + "\n".join(fails))
+        return CheckResult.passed("calculated values are self-consistent")

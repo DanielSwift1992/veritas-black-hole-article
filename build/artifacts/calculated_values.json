@@ -47,7 +47,7 @@
   "bekenstein_area": 1.2566370614359172e-05,
   "bekenstein_entropy": 1.6604025041431571e+41,
   "bekenstein_bits": 1.7350206016206505e+64,
-  "last_updated": "31 Jul 2025",
+  "last_updated": "07 Aug 2025",
   "repo_url": "https://github.com/DanielSwift1992/veritas-black-hole-article",
   "lean_proof_url": "https://github.com/DanielSwift1992/veritas-black-hole-article/blob/main/LeanBh/BlackHole.lean",
   "phi_script_url": "https://github.com/DanielSwift1992/veritas-black-hole-article/blob/main/scripts/get_phi_years.py",

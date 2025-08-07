@@ -1,6 +1,6 @@
 schema: 1
 plugins:
-  - plugins.bh_veritas_plugins
+  - ./plugins/bh_veritas_plugins
 nodes:
   - id: Article
     type: artifact
@@ -134,6 +134,23 @@ edges:
   - from: CleanMarkdown
     to: CleanMarkdown
     obligation: bh_clean_markdown_compile
+
+  # Deterministic value checks (after fill, before PDF)
+  - from: Article
+    to: Article
+    obligation: values_resolved_check
+
+  - from: CleanMarkdown
+    to: CleanMarkdown
+    obligation: clean_markdown_no_tags_check
+
+  - from: Article
+    to: StorageEconomics
+    obligation: storage_simple_content_check
+
+  - from: Article
+    to: PythonCalc
+    obligation: values_consistency_check
 
   # PDF compilation
   - from: PandocTool

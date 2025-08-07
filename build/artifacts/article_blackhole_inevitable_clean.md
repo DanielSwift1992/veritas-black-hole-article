@@ -1,6 +1,6 @@
 # Informational Black Holes:\\ The Physical Resolution to the Fermi Paradox
 
-*Last updated: 31 Jul 2025*
+*Last updated: 07 Aug 2025*
 
 ## Abstract
 

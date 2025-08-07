@@ -24,6 +24,10 @@ setup(
             'bh_generate_robust_plot = plugins.bh_veritas_plugins.visualizations:GenerateRobustPlot',
             'bh_generate_droplet_plot = plugins.bh_veritas_plugins.visualizations:GenerateDropletPlot',
             'bh_generate_silence_flow = plugins.bh_veritas_plugins.visualizations:GenerateSilenceFlow',
+            'values_resolved_check = plugins.bh_veritas_plugins.checks:ValuesResolvedCheck',
+            'clean_markdown_no_tags_check = plugins.bh_veritas_plugins.checks:CleanMarkdownNoTagsCheck',
+            'storage_simple_content_check = plugins.bh_veritas_plugins.checks:StorageSimpleContentCheck',
+            'values_consistency_check = plugins.bh_veritas_plugins.checks:ValuesConsistencyCheck',
         ],
     },
 ) 
