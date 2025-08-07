@@ -33,7 +33,7 @@ Either path ends in observational silence. Which one dominates makes no differen
 • Storing information faces a finite surface-area limit (Bekenstein bound [4]).
 • Any system with net positive information growth (r > 1) therefore hits that limit in finite time.
 
-**What happens next.** Exceeding the information-density bound forces negentropic nodes to concentrate mass-energy, triggering gravitational collapse into black holes. An illustrative φ-baseline places humanity ~192 years from the threshold, but code lets readers explore any parameters.
+**What happens next.** Exceeding the information-density bound forces negentropic nodes toward maximal-density configurations with external silence. In extreme regimes this aligns with gravitational collapse; в любом случае наблюдаемая подпись — тишина. An illustrative φ-baseline places humanity ~192 years from the threshold; code explores parameter ranges.
 
 ### Quantitative Forecast (Illustrative)
 
@@ -76,10 +76,10 @@ Landauer's principle sets a fixed energy floor for deleting information, while s
 
 | Year | StoreUSD/GB | DeleteUSD/GB | Cheaper | Factor |
 |---|---|---|---|---|
-| 2025 | 0.16 | ~6e-19 | Delete | 2.5e+17 |
-| 2075 | 4.8e-09 | ~6e-19 | Delete | 7468017203.06 |
-| 2125 | ~1e-16 | ~6e-19 | Delete | 222.56 |
-| 2217 | ~2e-30 | ~6e-19 | Store | 316172710538.03 |
+| 2025 | 0.16 | ~6e-19 | Delete | 2.51e+17 |
+| 2075 | 4.8e-09 | ~6e-19 | Delete | 7.47e+09 |
+| 2125 | ~1e-16 | ~6e-19 | Delete | 2.23e+02 |
+| 2217 | ~2e-30 | ~6e-19 | Store | 3.16e+11 |
 
 **Physical consequence:** Around 2141, storing information becomes cheaper than deleting it for the first time in history. This isn't an economic choice - it's a thermodynamic necessity. Systems must hoard data to minimize energy expenditure, accelerating the approach to information density limits. The crossover occurs decades before the singularity (2217), ensuring that negentropic nodes become information accumulators by physical law well before reaching the Bekenstein bound.
 
@@ -87,13 +87,13 @@ Landauer's principle sets a fixed energy floor for deleting information, while s
 
 Transmitting information across interstellar distances faces insurmountable energy barriers that worsen exponentially as storage becomes cheaper.
 
-**Energy analysis for 1 TB to Proxima Centauri (4.2 ly):**
+**Energy analysis for 1 TB to Proxima Centauri (4.2 ly):** (illustrative baseline; ranges handled in code)
 Minimum transmission energy requires ~$4.5 \times 10^{14}$ J, costing ~$1.2e+07 USD at current energy prices (~$0.0000015625 USD per bit).
 
 **Comparison with local storage:**
 In 2025, transmission costs 1.8× more than storage. By 2075, transmission costs 53,000,000× more than storage. By 2125, transmission costs 1.6e+15× more than storage.
 
-**Physical consequence:** By 2075, interstellar transmission becomes energetically prohibitive even under conservative technological assumptions. The energy required to send even one bit exceeds the energy available for storing millions of bits locally. This isn't about economics - it's about fundamental energy conservation making transmission physically impossible for any efficient system.
+**Physical consequence:** By 2075, interstellar transmission becomes экспоненциально менее эффективной, чем хранение, при реалистичных параметрах. Энергия на один бит сопоставима с энергией хранения миллионов–триллионов бит локально. Это отражает фундаментальные энергетические ограничения каналов, а не только экономику.
 
 ### Opportunity Cost: The Final Argument
 
@@ -119,7 +119,7 @@ The proposed resolution frames on one minimal principle rooted in basic thermody
 
 This follows from the observational framing of the Fermi Paradox: we look for detectable information-processing nodes, which presupposes growth (r > 1). Stagnation (r = 1) or regression (r < 1) naturally yields silence through resource decay, so rejecting P1 implies negentropic nodes never grow enough to be observable - a trivial resolution.
 
-**Note on "noise forgetting":** If systems forget 'noise' to stabilize information, they achieve effective r = 1 (stagnation) and become silent by definition. But if any net growth occurs (even minimal), the theorem applies with correspondingly longer timescales.
+**Note on reversible/adiabatic computing:** Practical computation and communication include irreversibilities (error correction, control, I/O), so the Landauer floor remains relevant at scale. Even with aggressive reversibility, any net growth r > 1 preserves the theorem; reversibility stretches timelines only logarithmically.
 
 ## Why Informational Growth Leads to Black Holes
 
@@ -129,7 +129,7 @@ The "informational singularity" is a phase transition. Externally, there are no 
 
 ### Why Negentropic Systems Don't Expand Across Space
 
-Why no sharding or interstellar spread? Surface-tension physics explains why sharding is energetically prohibitive, even without synchronization.
+Why no sharding or interstellar spread? Surface-tension physics explains why sharding is energetically prohibitive, even without synchronization. Capacity/SNR limits of interstellar channels further suppress viable throughput versus local storage.
 
 *Informational droplet.* Water droplets minimize surface area to reduce energy loss. Distributed information has an "informational surface": Communication channels dissipate energy per Landauer (transmitted bits copied/erased). Sharding into n nodes at distance d increases surface ~ n d, raising costs.
 

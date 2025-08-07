@@ -55,21 +55,24 @@ def calculate_storage_simple():
     return results
 
 def format_number(num):
-    """Format number for maximum readability"""
+    """Format number for maximum readability (general values)."""
     if num >= 1e15:
-        # Use scientific notation for very large numbers
         return f"{num:.1e}"
-    elif num >= 1:
+    if num >= 1:
         return f"{num:.2f}"
-    elif num >= 1e-6:
-        # Use decimal notation for readable numbers (down to micro scale)
+    if num >= 1e-6:
         formatted = f"{num:.12f}".rstrip('0').rstrip('.')
         return formatted
-    elif num >= 1e-15:
-        # Use scientific notation but cleaner format
+    if num >= 1e-15:
         return f"{num:.1e}"
-    else:
-        return f"~{num:.0e}"
+    return f"~{num:.0e}"
+
+def format_factor(num):
+    """Format multiplicative factor in a uniform scientific notation to avoid ambiguity."""
+    try:
+        return f"{float(num):.2e}"
+    except Exception:
+        return str(num)
 
 def main():
     parser = argparse.ArgumentParser(description='Generate simplified storage crossover table')
@@ -81,12 +84,12 @@ def main():
     if args.csv:
         print("Year,StoreUSD/GB,DeleteUSD/GB,Cheaper,Factor")
         for r in results:
-            print(f"{r['year']},{format_number(r['store_usd_gb'])},{format_number(r['delete_usd_gb'])},{r['cheaper']},{format_number(r['factor'])}")
+            print(f"{r['year']},{format_number(r['store_usd_gb'])},{format_number(r['delete_usd_gb'])},{r['cheaper']},{format_factor(r['factor'])}")
     else:
         print("| Year | StoreUSD/GB | DeleteUSD/GB | Cheaper | Factor |")
         print("|------|-------------|--------------|---------|--------|")
         for r in results:
-            print(f"| {r['year']} | {format_number(r['store_usd_gb'])} | {format_number(r['delete_usd_gb'])} | {r['cheaper']} | {format_number(r['factor'])} |")
+            print(f"| {r['year']} | {format_number(r['store_usd_gb'])} | {format_number(r['delete_usd_gb'])} | {r['cheaper']} | {format_factor(r['factor'])} |")
 
 if __name__ == "__main__":
     main()
