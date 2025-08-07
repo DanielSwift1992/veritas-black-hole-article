@@ -35,10 +35,8 @@ def main() -> None:
     for label, rv in marks.items():
         tv = math.log(N_MAX / N0) / math.log(rv)
         ax.plot([rv], [tv], marker="o", color="#d62728", ms=6)
-        ax.annotate(f"{label}: {int(round(tv))}",
-                    xy=(rv, tv), xytext=(rv+0.02, tv*1.2),
-                    textcoords='data', fontsize=10, color="#d62728",
-                    arrowprops=dict(arrowstyle="->", color="#d62728", lw=1.0))
+        # Label near the marker without arrow
+        ax.text(rv + 0.015, tv * 1.15, f"{label}: {int(round(tv))}", fontsize=10, color="#d62728")
 
     ax.set_xlabel(r"Growth factor $r$", fontsize=13)
     ax.set_ylabel(r"Years to threshold $t(r)$ (log scale)", fontsize=13)

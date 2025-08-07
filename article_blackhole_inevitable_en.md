@@ -53,11 +53,11 @@ The φ-scenario yields t ≈ <!--VALUE:phi_t_precise:float1-->191.8<!--END:phi_t
 ![Robustness to Boundary Rescaling](build/artifacts/robust_recal.png)
 *Figure 2 - Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.*
 
-![All Paths Lead to Silence](build/artifacts/silence_flow.png)
-*Figure 3 - Regardless of growth rate, every pathway culminates in observational silence.*
-
 ![Sensitivity of t(r)](build/artifacts/sensitivity_tr.png)
-*Figure 4 - Time-to-threshold stretches logarithmically as r → 1^+; finiteness remains.*
+*Figure 3 - Time-to-threshold stretches logarithmically as r → 1^+; finiteness remains.*
+
+![All Paths Lead to Silence](build/artifacts/silence_flow.png)
+*Figure 4 - Regardless of growth rate, every pathway culminates in observational silence.*
 
 ---
 
