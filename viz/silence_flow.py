@@ -11,26 +11,25 @@ colors = {
     "yellow": "#fff5cc",
 }
 
-dot = textwrap.dedent(f"""
-digraph SilenceFlow {{
-  graph [dpi=120, rankdir=LR, bgcolor="white", size="12,7!", margin="0.0,0.0"];
-  node  [shape=box, style="rounded", fontname="Helvetica", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black"];
+dot_template = """
+digraph SilenceFlow {
+  graph [dpi=180, rankdir=LR, bgcolor="white", size="12,7!", margin="0.2,0.2"];
+  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black"];
 
-  NegNode  [label="Negentropic\nNode", color="{colors['blue']}", fontcolor="black"];
-  Stagnant [label="r ≤ 1\nStagnation", color="{colors['orange']}", fontcolor="black"];
-  Growth   [label="r > 1\nGrowth", color="{colors['orange']}", fontcolor="black"];
-  Bound    [label="Bekenstein\nBound", color="{colors['green']}", fontcolor="black"];
-  Silent   [label="External Silence", shape=box, style="rounded,filled", fillcolor="{colors['yellow']}", fontcolor="black", color="#4d4d4d"];
+  NegNode  [label="Negentropic\nNode", color="BLUE", fontcolor="black"];
+  Stagnant [label="r ≤ 1\nStagnation", color="ORANGE", fontcolor="black"];
+  Growth   [label="r > 1\nGrowth", color="ORANGE", fontcolor="black"];
+  Bound    [label="Bekenstein\nBound", color="GREEN", fontcolor="black"];
+  Silent   [label="External Silence", shape=box, style="rounded,filled", fillcolor="YELLOW", fontcolor="black", color="#4d4d4d"];
 
   NegNode -> Stagnant;
   NegNode -> Growth;
   Growth  -> Bound;
   Stagnant -> Silent;
   Bound    -> Silent;
-
-  {{ rank=same; Stagnant; Growth }}\n  {{ rank=sink; Silent }}
-}}
-""")
+}
+"""
+dot = textwrap.dedent(dot_template).replace("BLUE", colors["blue"]).replace("ORANGE", colors["orange"]).replace("GREEN", colors["green"]).replace("YELLOW", colors["yellow"])
 
 try:
     dot_bin = "dot"

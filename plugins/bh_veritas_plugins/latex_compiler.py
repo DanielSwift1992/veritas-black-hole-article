@@ -30,25 +30,40 @@ class LaTeXPDFCompiler(BaseCheck):
             return CheckResult.failed(f"Article not found: {article_path}")
         
         try:
-            # Read markdown
-            markdown_content = article_path.read_text(encoding="utf-8")
-            
-            # Convert to PDF directly with pandoc
+            # Ensure all expected images exist before compilation
+            images_and_scripts = [
+                (repo_root / "build" / "artifacts" / "growth_curves.png", repo_root / "viz" / "generate_plot.py"),
+                (repo_root / "build" / "artifacts" / "robust_recal.png", repo_root / "viz" / "robust_plot.py"),
+                (repo_root / "build" / "artifacts" / "sensitivity_tr.png", repo_root / "viz" / "sensitivity_tr.py"),
+                (repo_root / "build" / "artifacts" / "silence_flow.png", repo_root / "viz" / "silence_flow.py"),
+                (repo_root / "build" / "artifacts" / "info_droplet.png", repo_root / "viz" / "info_droplet.py"),
+            ]
+            import sys
+            for img, script in images_and_scripts:
+                try:
+                    if (not img.exists()) or (img.stat().st_mtime < script.stat().st_mtime):
+                        subprocess.run([sys.executable, str(script)], cwd=str(repo_root), check=True)
+                except Exception:
+                    # Continue; pandoc will fail later with a clear message if missing
+                    pass
+
+            # Convert to PDF directly with pandoc using the clean markdown path
             output_dir = repo_root / "build" / "artifacts"
             output_dir.mkdir(parents=True, exist_ok=True)
             output_pdf = output_dir / "article_blackhole_inevitable.pdf"
-            
-            # Use pandoc to convert directly to PDF
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False, encoding='utf-8') as temp_md:
-                temp_md.write(markdown_content)
-                temp_md_path = temp_md.name
-            
+
+            # Ensure images referenced by relative paths are found via resource-path (search in artifacts dir first)
+            resource_path = f"{repo_root / 'build' / 'artifacts'}:{repo_root}"
+
             try:
                 result = subprocess.run([
                     "pandoc",
-                    temp_md_path,
+                    str(article_path),
                     "-o", str(output_pdf),
-                    "--pdf-engine=xelatex",  # Better Unicode support
+                    "--standalone",
+                    "--from=markdown+implicit_figures",
+                    "--resource-path", resource_path,
+                    "--pdf-engine=xelatex",
                     "--table-of-contents",
                     "--number-sections",
                     "-V", "geometry:margin=2.5cm",
@@ -58,20 +73,19 @@ class LaTeXPDFCompiler(BaseCheck):
                     "-V", "title=Informational Black Holes: The Physical Resolution to the Fermi Paradox",
                     "-V", "author=Daniil Strizhov",
                     "-V", "toc-title=Contents",
-                    "-V", "tables=true",  # Better table formatting
-                    "-V", "longtable=true",  # Allow tables to break across pages
+                    "-V", "tables=true",
+                    "-V", "longtable=true",
                     "--metadata", "title=Informational Black Holes: The Physical Resolution to the Fermi Paradox",
-                    "--shift-heading-level-by=-1"  # Convert ## to # to avoid all being subsections
+                    "--shift-heading-level-by=-1",
+                    "--dpi=300",
                 ], capture_output=True, text=True, check=True)
-                
+
                 return CheckResult.passed(f"PDF compiled: {output_pdf}")
-                
+
             except subprocess.CalledProcessError as e:
                 return CheckResult.failed(f"Pandoc failed: {e.stderr}")
             except FileNotFoundError:
                 return CheckResult.failed("Pandoc not found. Please install pandoc and pdflatex.")
-            finally:
-                pathlib.Path(temp_md_path).unlink(missing_ok=True)
                 
         except Exception as e:
             return CheckResult.failed(f"PDF compilation failed: {e}")
@@ -111,6 +125,10 @@ class CleanMarkdownCompiler(BaseCheck):
             
             # Clean up multiple newlines
             clean_content = re.sub(r'\n\n\n+', '\n\n', clean_content)
+
+            # Rewrite image paths that point to build/artifacts/ to be relative to the clean file location
+            # Since clean markdown is saved into build/artifacts/, images in the same folder should be referenced by filename only.
+            clean_content = re.sub(r'(!\[[^\]]*\]\()build/artifacts/([^\)]+\))', r'\1\2', clean_content)
             
             # Save clean markdown
             output_dir = repo_root / "build" / "artifacts"

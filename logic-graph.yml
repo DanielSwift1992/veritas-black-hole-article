@@ -71,12 +71,21 @@ nodes:
     value: build/artifacts
 
 edges:
-  # Cleanup phase - run first
+  # 1) Cleanup
   - from: Article
     to: CleanArtifacts
     obligation: bh_cleanup_artifacts
 
-  # Main processing
+  # 2) Fill values and produce clean markdown early
+  - from: Article
+    to: CleanMarkdown
+    obligation: bh_markdown_fill
+
+  - from: CleanMarkdown
+    to: CleanMarkdown
+    obligation: bh_clean_markdown_compile
+
+  # 3) Core calculations and Lean proof
   - from: CleanArtifacts
     to: PythonCalc
     obligation: bh_python_timeline_check
@@ -87,7 +96,7 @@ edges:
     to: LeanProject
     obligation: bh_lean_proof_check
 
-  # Generate visualizations after cleanup
+  # 4) Generate visualizations (after cleanup)
   - from: CleanArtifacts
     to: GrowthPlot
     obligation: bh_generate_growth_plot
@@ -108,16 +117,28 @@ edges:
     to: SensitivityTR
     obligation: bh_generate_sensitivity_plot
 
-  # Check plots exist after generation
+  # 5) Freshness checks for plots
   - from: GrowthPlot
-    to: PythonCalc
+    to: GrowthPlot
     obligation: growth_curve_png_check
 
   - from: SensitivityTR
-    to: PythonCalc
+    to: SensitivityTR
     obligation: sens_tr_png_check
 
-  # Verify that all quantitative and sensitivity tables match code
+  - from: RobustPlot
+    to: RobustPlot
+    obligation: robust_png_check
+
+  - from: DropletPlot
+    to: DropletPlot
+    obligation: droplet_png_check
+
+  - from: Article
+    to: SilenceFlow
+    obligation: silence_flow_png_check
+
+  # 6) Article-table and economics checks
   - from: Article
     to: SensitivityCheck
     obligation: article_table_check
@@ -126,29 +147,20 @@ edges:
     to: StorageEconomics
     obligation: storage_simple_check
 
+  - from: Article
+    to: StorageEconomics
+    obligation: storage_simple_content_check
 
-
-  # Centralization energy inequality
+  # 7) Centralization energy inequality + value consistency
   - from: Article
     to: PythonCalc
     obligation: centralization_energy_check
 
-  # Silence flow chart
   - from: Article
-    to: SilenceFlow
-    obligation: silence_flow_png_check
+    to: PythonCalc
+    obligation: values_consistency_check
 
-  # Value substitution first
-  - from: Article
-    to: CleanMarkdown
-    obligation: bh_markdown_fill
-
-  # Clean markdown compilation after value substitution
-  - from: CleanMarkdown
-    to: CleanMarkdown
-    obligation: bh_clean_markdown_compile
-
-  # Deterministic value checks (after fill, before PDF)
+  # 8) Value substitution sanity and clean-md integrity (after fill/clean)
   - from: Article
     to: Article
     obligation: values_resolved_check
@@ -157,18 +169,31 @@ edges:
     to: CleanMarkdown
     obligation: clean_markdown_no_tags_check
 
-  - from: Article
-    to: StorageEconomics
-    obligation: storage_simple_content_check
-
-  - from: Article
-    to: PythonCalc
-    obligation: values_consistency_check
-
-  # PDF compilation
+  # 9) PDF compilation (last)
   - from: PandocTool
     to: PDFArticle
     obligation: bh_pandoc_check
+
+  # Ensure images generated before PDF regardless of cleanup
+  - from: GrowthPlot
+    to: PDFArticle
+    obligation: growth_curve_png_check
+
+  - from: RobustPlot
+    to: PDFArticle
+    obligation: robust_png_check
+
+  - from: SensitivityTR
+    to: PDFArticle
+    obligation: sens_tr_png_check
+
+  - from: SilenceFlow
+    to: PDFArticle
+    obligation: silence_flow_png_check
+
+  - from: DropletPlot
+    to: PDFArticle
+    obligation: droplet_png_check
 
   - from: CleanMarkdown
     to: PDFArticle

@@ -1,5 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+try:
+    from .style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
+except Exception:
+    from style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
 import math
 import os
 
@@ -17,8 +21,8 @@ scenarios = {
 
 colors = ["#1f77b4", "#ff7f0e", "#2ca02c"]  # blue, orange, green
 
-plt.style.use('seaborn-v0_8-whitegrid')
-fig, ax = plt.subplots(figsize=(12, 7), dpi=120)
+init_matplotlib()
+fig, ax = plt.subplots(figsize=(12, 7))
 
 # Plot data
 for idx, (name, r) in enumerate(scenarios.items()):
@@ -46,13 +50,12 @@ ax.set_yscale('log')
 ax.set_xlabel('Year', fontsize=14)
 ax.set_ylabel('Global Data (bits, log scale)', fontsize=14)
 ax.set_title('Informational Singularity: Timeline to Physical Limit', fontsize=17, pad=15)
-ax.legend(fontsize=13, frameon=True, loc='upper left')
-ax.grid(True, which="both", ls="-", color='#e0e0e0', alpha=0.7)
-fig.tight_layout()
+ax.legend(loc='upper left')
+apply_axes_style(ax)
 
 # Save with white background
 art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
 os.makedirs(art_dir, exist_ok=True)
 out_png = os.path.join(art_dir, 'growth_curves.png')
-plt.savefig(out_png, transparent=False, bbox_inches='tight')
+save_figure(fig, out_png)
 print(f"Plot saved to {out_png}") 

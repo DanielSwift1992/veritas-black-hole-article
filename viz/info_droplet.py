@@ -2,7 +2,12 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from pathlib import Path
 import os
+try:
+    from .style import init_matplotlib, save_figure  # type: ignore
+except Exception:
+    from style import init_matplotlib, save_figure  # type: ignore
 
+init_matplotlib()
 fig, ax = plt.subplots(figsize=(6,3))
 ax.set_aspect('equal')
 ax.axis('off')
@@ -22,5 +27,5 @@ plt.tight_layout()
 art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
 os.makedirs(art_dir, exist_ok=True)
 output = Path(art_dir) / 'info_droplet.png'
-plt.savefig(output, dpi=150)
+save_figure(fig, str(output))
 print(f'Saved {output}')

@@ -1,5 +1,9 @@
 import math
 import matplotlib.pyplot as plt
+try:
+    from .style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
+except Exception:
+    from style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
 from pathlib import Path
 import os
 
@@ -18,7 +22,8 @@ recal_years = math.log((N_MAX * factor) / N0) / math.log(phi)
 years = list(range(0, int(recal_years) + 20))
 N_base = [N0 * (phi ** t) for t in years]
 
-plt.figure(figsize=(6,4))
+init_matplotlib()
+fig = plt.figure(figsize=(6,4))
 plt.yscale('log')
 plt.plot([START_YEAR + y for y in years], N_base, label='Data growth (φ)')
 plt.axhline(N_MAX, color='red', linestyle='--', label='Original Bekenstein bound')
@@ -27,9 +32,9 @@ plt.xlabel('Calendar year')
 plt.ylabel('Bits stored')
 plt.title('Robustness to distance rescaling')
 plt.legend()
-plt.tight_layout()
+apply_axes_style(plt.gca())
 art_dir = os.getenv('BH_ARTIFACT_DIR', 'build/artifacts')
 os.makedirs(art_dir, exist_ok=True)
 output = Path(art_dir) / 'robust_recal.png'
-plt.savefig(output, dpi=150)
+save_figure(fig, str(output))
 print(f'Saved {output}')

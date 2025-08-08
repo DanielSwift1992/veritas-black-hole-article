@@ -1,7 +1,7 @@
 
 digraph SilenceFlow {
-  graph [dpi=120, rankdir=LR, bgcolor="white", size="12,7!", margin="0.0,0.0"];
-  node  [shape=box, style="rounded", fontname="Helvetica", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black"];
+  graph [dpi=180, rankdir=LR, bgcolor="white", size="12,7!", margin="0.2,0.2"];
+  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black"];
 
   NegNode  [label="Negentropic
 Node", color="#1f77b4", fontcolor="black"];
@@ -18,7 +18,4 @@ Bound", color="#2ca02c", fontcolor="black"];
   Growth  -> Bound;
   Stagnant -> Silent;
   Bound    -> Silent;
-
-  { rank=same; Stagnant; Growth }
-  { rank=sink; Silent }
 }

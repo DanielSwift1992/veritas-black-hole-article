@@ -1,6 +1,6 @@
 # Informational Black Holes:\\ The Physical Resolution to the Fermi Paradox
 
-*Last updated: 07 Aug 2025*
+*Last updated: 08 Aug 2025*
 
 ## Abstract
 
@@ -45,16 +45,16 @@ Either path ends in observational silence. Which one dominates makes no differen
 
 The φ-scenario yields t ≈ 191.8 years. We round this up to 192 for conservatism. Python verification confirms 2217 (2025 + ceil 191.8).
 
-![Informational Singularity Timeline](build/artifacts/growth_curves.png)
+![Informational Singularity Timeline](growth_curves.png)
 *Figure 1 - Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at 2217 CE. Conservative and big-data scenarios follow.*
 
-![Robustness to Boundary Rescaling](build/artifacts/robust_recal.png)
+![Robustness to Boundary Rescaling](robust_recal.png)
 *Figure 2 - Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.*
 
-![Sensitivity of t(r)](build/artifacts/sensitivity_tr.png)
+![Sensitivity of t(r)](sensitivity_tr.png)
 *Figure 3 - Time-to-threshold stretches logarithmically as r → 1^+; finiteness remains.*
 
-![All Paths Lead to Silence](build/artifacts/silence_flow.png)
+![All Paths Lead to Silence](silence_flow.png)
 *Figure 4 - Regardless of growth rate, every pathway culminates in observational silence.*
 
 ---
@@ -140,7 +140,7 @@ $E_{\text{sharded}} \geq E_{\text{central}} + n d kT \ln 2$ (for sync traffic). 
 
 **Unsynced sharding objection:** Even without synchronization, sharding creates independent nodes, each inheriting r > 1 and hitting the Bekenstein bound independently, becoming silent mini-black-holes. No coherent galactic expansion - signals from rare probes drown in cosmic noise (e.g., pencil-beams undetectable beyond ~10 ly). Von Neumann probes become energetically unfavorable by ~2075 even with optimistic technological improvements (per Information Economics). If launched earlier, their signals are too weak and noisy for detection across interstellar distances.
 
-![Informational Droplet Analogy](build/artifacts/info_droplet.png)
+![Informational Droplet Analogy](info_droplet.png)
 *Figure 5 - Sharding increases "informational surface" and dissipation. Centralisation minimises it.*
 
 ## The Core Theorem: Finite-Time Singularity

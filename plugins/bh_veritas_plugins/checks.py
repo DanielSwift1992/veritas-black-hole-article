@@ -148,12 +148,17 @@ def _png_check(name: str, png_path: str, script_path: str):
     class _Check(BaseCheck):
         def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
             repo_root = pathlib.Path(__file__).resolve().parents[2]
-            png = repo_root / png_path
-            script = repo_root / script_path
-            if not png.exists():
-                return CheckResult.failed(f"PNG not found: {png}")
-            if png.stat().st_mtime < script.stat().st_mtime:
-                return CheckResult.failed(f"PNG older than {script_path}, regenerate.")
+            png = (repo_root / png_path).resolve()
+            script = (repo_root / script_path).resolve()
+            # Ensure artifact exists; if missing or stale, (re)generate via script
+            try:
+                if (not png.exists()) or (png.stat().st_mtime < script.stat().st_mtime):
+                    import sys, subprocess
+                    subprocess.run([sys.executable, str(script)], cwd=str(repo_root), check=True)
+                if not png.exists():
+                    return CheckResult.failed(f"PNG not found after regeneration: {png}")
+            except Exception as e:
+                return CheckResult.failed(f"Failed to (re)generate {png_path}: {e}")
             return CheckResult.passed(f"{png_path} is up-to-date")
 
     return _Check
@@ -579,3 +584,56 @@ class ValuesConsistencyCheck(BaseCheck):
         if fails:
             return CheckResult.failed("Value consistency errors:\n" + "\n".join(fails))
         return CheckResult.passed("calculated values are self-consistent")
+
+# ---------------------------------------------------------------------------
+# Text presence checks for production readiness
+# ---------------------------------------------------------------------------
+
+
+@plugin("physics_constants_check")
+class PhysicsConstantsCheck(BaseCheck):
+    """Ensure article mentions Landauer form and temperature assumption (e.g., 300 K)."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not article.exists():
+            return CheckResult.failed("Article not found")
+        text = article.read_text(encoding="utf-8")
+        ok_landauer = ("kT ln 2" in text) or ("kT\\ln 2" in text) or ("kT \\ln 2" in text)
+        ok_temp = ("300 K" in text) or ("T = 300" in text) or ("T=300" in text)
+        if not ok_landauer:
+            return CheckResult.failed("Landauer form (kT ln 2) not explicitly mentioned")
+        if not ok_temp:
+            return CheckResult.failed("Temperature assumption (e.g., 300 K) not found")
+        return CheckResult.passed("Physics constants are stated in article")
+
+
+@plugin("compare_sharded_mention_check")
+class CompareShardedMentionCheck(BaseCheck):
+    """Ensure article references the sharded vs centralized comparison used in checks."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not article.exists():
+            return CheckResult.failed("Article not found")
+        text = article.read_text(encoding="utf-8")
+        if ("compare-sharded" in text) or ("--compare-sharded" in text):
+            return CheckResult.passed("compare-sharded mention present")
+        return CheckResult.failed("compare-sharded invocation not mentioned in text")
+
+
+@plugin("lean_anchor_check")
+class LeanAnchorCheck(BaseCheck):
+    """Ensure article has explicit anchor to Lean theorem/source file."""
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        article = repo_root / "article_blackhole_inevitable_en.md"
+        if not article.exists():
+            return CheckResult.failed("Article not found")
+        text = article.read_text(encoding="utf-8")
+        if ("BlackHole.lean" in text) and ("Lean4" in text or "Lean 4" in text):
+            return CheckResult.passed("Lean anchors present")
+        return CheckResult.failed("Lean anchors missing (expected mention of BlackHole.lean and Lean4)")

@@ -7,6 +7,10 @@ from __future__ import annotations
 
 import numpy as np
 import matplotlib.pyplot as plt
+try:
+    from .style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
+except Exception:
+    from style import init_matplotlib, apply_axes_style, save_figure  # type: ignore
 import math
 import os
 
@@ -14,8 +18,8 @@ N0 = 1.448e24
 N_MAX = 1.74e64
 
 def main() -> None:
-    plt.style.use('seaborn-v0_8-whitegrid')
-    fig, ax = plt.subplots(figsize=(11, 6), dpi=140)
+    init_matplotlib()
+    fig, ax = plt.subplots(figsize=(11, 6))
 
     r_vals = np.concatenate([
         np.linspace(1.0001, 1.01, 200),
@@ -45,12 +49,12 @@ def main() -> None:
     ax.set_yscale('log')
     ax.grid(True, which="both", ls="-", color="#e0e0e0", alpha=0.7)
     ax.legend(frameon=True, fontsize=10, loc='upper right')
-    fig.tight_layout()
+    apply_axes_style(ax)
 
     out_dir = os.getenv("BH_ARTIFACT_DIR", "build/artifacts")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "sensitivity_tr.png")
-    plt.savefig(out_path, transparent=False, bbox_inches='tight')
+    save_figure(fig, out_path)
     print(f"Plot saved to {out_path}")
 
 if __name__ == "__main__":
