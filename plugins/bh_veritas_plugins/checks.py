@@ -603,7 +603,9 @@ class DocxEmbedCheck(BaseCheck):
 
     def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
         try:
-            docx_path = pathlib.Path(artifact)
+            # In this framework, `artifact` is the repo root, not the file path
+            repo_root = pathlib.Path(__file__).resolve().parents[2]
+            docx_path = repo_root / "build" / "artifacts" / "article_blackhole_inevitable.docx"
             if not docx_path.exists():
                 return CheckResult.failed(f"DOCX not found: {docx_path}")
             size = docx_path.stat().st_size

@@ -184,6 +184,7 @@ class MDPIWordExporter(BaseCheck):
         repo_root = self._find_repo_root(art_path if art_path.exists() else pathlib.Path.cwd())
 
         # Ensure all expected images exist before DOCX compilation
+        # Proactively try to (re)generate required images; do not fail early here
         try:
             images_and_scripts = [
                 (repo_root / "build" / "artifacts" / "growth_curves.png", repo_root / "viz" / "generate_plot.py"),
@@ -192,6 +193,7 @@ class MDPIWordExporter(BaseCheck):
                 (repo_root / "build" / "artifacts" / "silence_flow.png", repo_root / "viz" / "silence_flow.py"),
                 (repo_root / "build" / "artifacts" / "info_droplet.png", repo_root / "viz" / "info_droplet.py"),
             ]
+            import sys
             for img, script in images_and_scripts:
                 try:
                     if (not img.exists()) or (img.stat().st_mtime < script.stat().st_mtime):
