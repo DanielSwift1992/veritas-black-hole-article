@@ -35,6 +35,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Veritas core (CLI)
+        run: |
+          pip install git+https://github.com/DanielSwift1992/veritas-core@master
+
       - name: Install elan (Lean toolchain)
         run: |
           curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
