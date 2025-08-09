@@ -621,6 +621,27 @@ class DocxEmbedCheck(BaseCheck):
             return CheckResult.failed(f"DOCX embed check failed: {e}")
 
 # ---------------------------------------------------------------------------
+# PDF existence/size check
+# ---------------------------------------------------------------------------
+
+
+@plugin("pdf_exists_check")
+class PdfExistsCheck(BaseCheck):
+    """Ensure the PDF artifact exists and has a reasonable size."""
+
+    MIN_SIZE = 100_000
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        repo_root = pathlib.Path(__file__).resolve().parents[2]
+        pdf = repo_root / "build" / "artifacts" / "article_blackhole_inevitable.pdf"
+        if not pdf.exists():
+            return CheckResult.failed(f"PDF not found: {pdf}")
+        size = pdf.stat().st_size
+        if size <= self.MIN_SIZE:
+            return CheckResult.failed(f"PDF too small ({size} bytes) — expected > {self.MIN_SIZE}")
+        return CheckResult.passed(f"PDF OK: {size} bytes")
+
+# ---------------------------------------------------------------------------
 # Text presence checks for production readiness
 # ---------------------------------------------------------------------------
 

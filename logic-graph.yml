@@ -210,6 +210,10 @@ edges:
     to: PDFArticle
     obligation: bh_latex_pdf_compile
 
+  - from: PDFArticle
+    to: PDFArticle
+    obligation: pdf_exists_check
+
   
   - from: CleanMarkdown
     to: DOCXArticle
