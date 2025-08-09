@@ -68,7 +68,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: publication
-          path: |
-            build/artifacts/article_blackhole_inevitable.pdf
-            build/artifacts/article_blackhole_inevitable.docx
+          path: build/artifacts/**
+          if-no-files-found: error
 
