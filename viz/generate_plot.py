@@ -30,7 +30,7 @@ for idx, (name, r) in enumerate(scenarios.items()):
     years = np.linspace(0, t, 200)
     N = N0 * (r**years)
     color = colors[idx % len(colors)]
-    ax.plot(start_year + years, N, label=f"{name} (r={r:.2f})", linewidth=2.5, color=color)
+    ax.plot(start_year + years, N, label=f"{name} (r={r:.2f})", color=color)
     # Точка соприкосновения
     x_cross = start_year + t
     ax.scatter([x_cross], [N_max], color=color, s=80, zorder=5)
@@ -47,10 +47,10 @@ for idx, (name, r) in enumerate(scenarios.items()):
 # Formatting
 ax.axhline(N_max, color='red', linestyle='--', label='Bekenstein Bound (N_max)', linewidth=2)
 ax.set_yscale('log')
-ax.set_xlabel('Year', fontsize=14)
-ax.set_ylabel('Global Data (bits, log scale)', fontsize=14)
-ax.set_title('Informational Singularity: Timeline to Physical Limit', fontsize=17, pad=15)
-ax.legend(loc='upper left')
+ax.set_xlabel('Year')
+ax.set_ylabel('Global Data (bits, log scale)')
+ax.set_title('Informational Singularity: Timeline to Physical Limit', pad=18)
+ax.legend(loc='lower right')
 apply_axes_style(ax)
 
 # Save with white background

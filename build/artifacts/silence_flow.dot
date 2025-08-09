@@ -1,17 +1,18 @@
 
 digraph SilenceFlow {
   graph [dpi=180, rankdir=LR, bgcolor="white", size="12,7!", margin="0.2,0.2"];
-  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black"];
+  node  [shape=box, style="filled", fontname="DejaVu Sans", fontsize=12, color="#4d4d4d", fillcolor="white", fontcolor="black", penwidth=1.2];
+  edge  [color="#666666", penwidth=1.4, arrowsize=0.9, arrowhead="vee", splines=true];
 
   NegNode  [label="Negentropic
-Node", color="#1f77b4", fontcolor="black"];
+Node", color="#1f77b4", fillcolor="#F9FCFE", fontcolor="black", style="filled,rounded"];
   Stagnant [label="r ≤ 1
-Stagnation", color="#ff7f0e", fontcolor="black"];
+Stagnation", color="#ff7f0e", fillcolor="#FFFEFB", fontcolor="black", style="filled,rounded"];
   Growth   [label="r > 1
-Growth", color="#ff7f0e", fontcolor="black"];
+Growth", color="#ff7f0e", fillcolor="#FFFEFB", fontcolor="black", style="filled,rounded"];
   Bound    [label="Bekenstein
-Bound", color="#2ca02c", fontcolor="black"];
-  Silent   [label="External Silence", shape=box, style="rounded,filled", fillcolor="#fff5cc", fontcolor="black", color="#4d4d4d"];
+Bound", color="#4AA564", fillcolor="#F7FFF7", fontcolor="black", style="filled,rounded"];
+  Silent   [label="External Silence", shape=box, style="filled,rounded", fillcolor="#FFF9F9", fontcolor="black", color="#d62728"];
 
   NegNode -> Stagnant;
   NegNode -> Growth;

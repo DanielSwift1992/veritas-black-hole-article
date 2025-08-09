@@ -60,6 +60,13 @@ nodes:
     description: "PDF version of the article compiled from LaTeX."
     value: build/artifacts/article_blackhole_inevitable.pdf
 
+  - id: DOCXArticle
+    type: artifact
+    description: "DOCX version of the article for MDPI submission."
+    value: build/artifacts/article_blackhole_inevitable.docx
+
+  # MDPIZip temporarily disabled per request
+
   - id: PandocTool
     type: artifact
     description: "Pandoc installation check."
@@ -198,5 +205,34 @@ edges:
   - from: CleanMarkdown
     to: PDFArticle
     obligation: bh_latex_pdf_compile
+
+  # Force PDF compilation to always run as a terminal self-check
+  - from: PDFArticle
+    to: PDFArticle
+    obligation: bh_latex_pdf_compile
+
+  # 10) MDPI Word export and ZIP packaging
+  - from: CleanMarkdown
+    to: DOCXArticle
+    obligation: bh_docx_compile
+
+  # Ensure images are generated/fresh before DOCX as well
+  - from: GrowthPlot
+    to: DOCXArticle
+    obligation: growth_curve_png_check
+  - from: RobustPlot
+    to: DOCXArticle
+    obligation: robust_png_check
+  - from: SensitivityTR
+    to: DOCXArticle
+    obligation: sens_tr_png_check
+  - from: SilenceFlow
+    to: DOCXArticle
+    obligation: silence_flow_png_check
+  - from: DropletPlot
+    to: DOCXArticle
+    obligation: droplet_png_check
+
+  # ZIP packaging disabled for now
 
  

@@ -23,7 +23,7 @@ years = list(range(0, int(recal_years) + 20))
 N_base = [N0 * (phi ** t) for t in years]
 
 init_matplotlib()
-fig = plt.figure(figsize=(6,4))
+fig = plt.figure(figsize=(12,7))
 plt.yscale('log')
 plt.plot([START_YEAR + y for y in years], N_base, label='Data growth (φ)')
 plt.axhline(N_MAX, color='red', linestyle='--', label='Original Bekenstein bound')

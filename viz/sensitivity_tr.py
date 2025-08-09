@@ -19,7 +19,7 @@ N_MAX = 1.74e64
 
 def main() -> None:
     init_matplotlib()
-    fig, ax = plt.subplots(figsize=(11, 6))
+    fig, ax = plt.subplots(figsize=(12, 7))
 
     r_vals = np.concatenate([
         np.linspace(1.0001, 1.01, 200),

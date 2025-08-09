@@ -18,6 +18,8 @@ setup(
             'bh_pandoc_check = plugins.bh_veritas_plugins.latex_compiler:PandocCheck',
             'bh_latex_pdf_compile = plugins.bh_veritas_plugins.latex_compiler:LaTeXPDFCompiler',
             'bh_clean_markdown_compile = plugins.bh_veritas_plugins.latex_compiler:CleanMarkdownCompiler',
+            'bh_docx_compile = plugins.bh_veritas_plugins.latex_compiler:MDPIWordExporter',
+            'bh_mdpi_zip_package = plugins.bh_veritas_plugins.latex_compiler:MDPISubmissionZipper',
             'bh_markdown_fill = plugins.bh_veritas_plugins.fill_markdown:FillMarkdown',
             'bh_cleanup_artifacts = plugins.bh_veritas_plugins.cleanup:CleanupArtifacts',
             'bh_generate_growth_plot = plugins.bh_veritas_plugins.visualizations:GenerateGrowthPlot',
