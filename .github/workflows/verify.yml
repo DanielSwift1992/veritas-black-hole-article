@@ -20,7 +20,11 @@ jobs:
       - name: Install system deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc graphviz texlive-xetex texlive-fonts-recommended
+          sudo apt-get install -y \
+            pandoc graphviz \
+            texlive-xetex texlive-fonts-recommended \
+            texlive-latex-recommended texlive-latex-extra \
+            lmodern fonts-dejavu-core
 
       - name: Cache pip
         uses: actions/cache@v4
@@ -54,6 +58,10 @@ jobs:
 
       - name: Verify (veritas)
         run: veritas check --concurrency=1
+
+      - name: List built artifacts
+        run: |
+          ls -l build/artifacts || true
 
       - name: Upload artifacts
         if: always()
