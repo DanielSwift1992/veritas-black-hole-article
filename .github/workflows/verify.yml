@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Veritas core (CLI)
         run: |
-          pip install git+https://github.com/DanielSwift1992/veritas-core@master
+          pip install git+https://github.com/DanielSwift1992/veritas-core@main
 
       - name: Install elan (Lean toolchain)
         run: |
