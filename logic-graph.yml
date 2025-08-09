@@ -59,6 +59,11 @@ nodes:
     description: "PDF version of the article compiled from LaTeX."
     value: build/artifacts/article_blackhole_inevitable.pdf
 
+  - id: PDFVerified
+    type: artifact
+    description: "PDF existence and size validated"
+    value: build/artifacts/article_blackhole_inevitable.pdf
+
   - id: DOCXArticle
     type: artifact
     description: "DOCX version of the article for MDPI submission."
@@ -212,6 +217,10 @@ edges:
 
   - from: PDFArticle
     to: PDFArticle
+    obligation: bh_latex_pdf_compile
+
+  - from: PDFArticle
+    to: PDFVerified
     obligation: pdf_exists_check
 
   
