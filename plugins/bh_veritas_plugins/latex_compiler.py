@@ -91,6 +91,11 @@ class LaTeXPDFCompiler(BaseCheck):
                     "--dpi=300",
                 ], capture_output=True, text=True, check=True)
 
+                # Extra guard: scan stderr for fatal errors even if exit code 0
+                stderr_lower = (result.stderr or "").lower()
+                if any(tok in stderr_lower for tok in ["error:", "fatal:", "undefined control sequence"]):
+                    return CheckResult.failed(f"Pandoc/LaTeX reported errors despite zero exit code:\n{result.stderr}")
+
                 if not output_pdf.exists():
                     return CheckResult.failed(f"Pandoc reported success, but PDF not found at {output_pdf}")
                 return CheckResult.passed(f"PDF compiled: {output_pdf}")
@@ -133,7 +138,7 @@ class CleanMarkdownCompiler(BaseCheck):
             pattern = r'<!--VALUE:[^>]+-->([^<]*)<!--END:[^>]+-->'
             clean_content = re.sub(pattern, replace_value_tag, content)
             
-            # Remove any remaining HTML comments
+            # Remove any remaining HTML comments, but keep lines intact
             clean_content = re.sub(r'<!--[^>]*-->', '', clean_content)
             
             # Clean up multiple newlines

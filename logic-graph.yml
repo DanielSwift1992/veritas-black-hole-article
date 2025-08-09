@@ -176,6 +176,19 @@ edges:
     to: CleanMarkdown
     obligation: clean_markdown_no_tags_check
 
+  # Text presence checks for production readiness
+  - from: Article
+    to: Article
+    obligation: physics_constants_check
+
+  - from: Article
+    to: Article
+    obligation: lean_anchor_check
+
+  - from: Article
+    to: Article
+    obligation: compare_sharded_mention_check
+
   # 9) PDF compilation (last)
   - from: PandocTool
     to: PDFArticle
@@ -206,10 +219,8 @@ edges:
     to: PDFArticle
     obligation: bh_latex_pdf_compile
 
-  # Force PDF compilation to always run as a terminal self-check
-  - from: PDFArticle
-    to: PDFArticle
-    obligation: bh_latex_pdf_compile
+  # PDF compilation
+  # (single terminal step; no self-loop to avoid duplicate runs)
 
   # 10) MDPI Word export and ZIP packaging
   - from: CleanMarkdown
@@ -232,6 +243,11 @@ edges:
   - from: DropletPlot
     to: DOCXArticle
     obligation: droplet_png_check
+
+  # Validate that DOCX embeds images and is of expected size
+  - from: DOCXArticle
+    to: DOCXArticle
+    obligation: docx_embed_check
 
   # ZIP packaging disabled for now
 

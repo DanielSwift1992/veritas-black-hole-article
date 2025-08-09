@@ -7,6 +7,8 @@ Generates a JSON file with all computed values for automatic substitution.
 import json
 import math
 from datetime import datetime
+import subprocess
+import pathlib
 
 def calculate_all_values():
     """Calculate all values used in the article"""
@@ -114,8 +116,19 @@ def calculate_all_values():
     values['bekenstein_entropy'] = S
     values['bekenstein_bits'] = bits_bekenstein
     
-    # Current date
-    values['last_updated'] = datetime.now().strftime("%d %b %Y")
+    # Stable last_updated: derive from last git commit date if available; otherwise keep fixed baseline
+    try:
+        repo_root = pathlib.Path(__file__).resolve().parents[1]
+        result = subprocess.run(["git", "log", "-1", "--format=%cd", "--date=short"], cwd=str(repo_root), capture_output=True, text=True, check=True)
+        iso = (result.stdout or "").strip()  # e.g., 2025-08-08
+        if iso:
+            y, m, d = iso.split("-")
+            dt = datetime(int(y), int(m), int(d))
+            values['last_updated'] = dt.strftime("%d %b %Y")
+        else:
+            values['last_updated'] = "08 Aug 2025"
+    except Exception:
+        values['last_updated'] = "08 Aug 2025"
     
     # Repository links
     repo_base = "https://github.com/DanielSwift1992/veritas-black-hole-article"

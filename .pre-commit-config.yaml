@@ -2,6 +2,14 @@ repos:
   - repo: local
     hooks:
       - id: veritas-check
+        name: veritas check
+        entry: veritas check --concurrency=1
+        language: system
+        pass_filenames: false
+repos:
+  - repo: local
+    hooks:
+      - id: veritas-check
         name: veritas check (local)
         entry: python -m veritas.vertex.cli check
         language: system

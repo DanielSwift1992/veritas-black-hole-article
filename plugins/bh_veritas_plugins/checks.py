@@ -586,6 +586,39 @@ class ValuesConsistencyCheck(BaseCheck):
         return CheckResult.passed("calculated values are self-consistent")
 
 # ---------------------------------------------------------------------------
+# DOCX embed check
+# ---------------------------------------------------------------------------
+
+
+@plugin("docx_embed_check")
+class DocxEmbedCheck(BaseCheck):
+    """Validate that the DOCX has embedded images and sufficient size.
+
+    - Size must be > 700 KB per acceptance criteria
+    - Must contain at least 5 media files under word/media
+    """
+
+    MIN_SIZE = 700_000
+    MIN_MEDIA = 5
+
+    def run(self, artifact: pathlib.Path, **kw) -> CheckResult:
+        try:
+            docx_path = pathlib.Path(artifact)
+            if not docx_path.exists():
+                return CheckResult.failed(f"DOCX not found: {docx_path}")
+            size = docx_path.stat().st_size
+            if size <= self.MIN_SIZE:
+                return CheckResult.failed(f"DOCX too small ({size} bytes) — expected > {self.MIN_SIZE}")
+            import zipfile
+            with zipfile.ZipFile(docx_path, 'r') as zf:
+                media = [n for n in zf.namelist() if n.startswith('word/media/')]
+            if len(media) < self.MIN_MEDIA:
+                return CheckResult.failed(f"DOCX embeds {len(media)} media files, expected ≥ {self.MIN_MEDIA}")
+            return CheckResult.passed(f"DOCX OK: {size} bytes, media files: {len(media)}")
+        except Exception as e:
+            return CheckResult.failed(f"DOCX embed check failed: {e}")
+
+# ---------------------------------------------------------------------------
 # Text presence checks for production readiness
 # ---------------------------------------------------------------------------
 

@@ -58,17 +58,13 @@ We use φ ≈ 1.618 as the minimal loss‑free growth factor. In a strictly loss
 
 The φ-scenario gives t ≈ 191.8 years. We round this up to 192 for conservatism. Python verification confirms 2217 (2025 + ceil 191.8).
 
-![Informational Singularity Timeline](growth_curves.png)
-*Figure 1 - Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at 2217 CE. Conservative and big-data scenarios follow.*
+![Figure 1 - Exponential data-growth curves (log scale) intersect the finite Bekenstein bound. The φ-trajectory crosses at 2217 CE. Conservative and big-data scenarios follow.](growth_curves.png){#fig:growth}
 
-![Boundary Rescaling Sensitivity](robust_recal.png)
-*Figure 2 - Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.*
+![Figure 2 - Doubling the information bound delays the intersection by ≈1.44 years. Finiteness is unaffected.](robust_recal.png){#fig:rescale}
 
-![Sensitivity of t(r)](sensitivity_tr.png)
-*Figure 3 - Time-to-threshold stretches logarithmically as r → 1^+. Finiteness remains.*
+![Figure 3 - Time-to-threshold stretches logarithmically as r → 1^+. Finiteness remains.](sensitivity_tr.png){#fig:sensitivity}
 
-![All Paths Lead to Silence](silence_flow.png)
-*Figure 4 - Regardless of growth rate, every pathway culminates in observational silence.*
+![Figure 4 - Regardless of growth rate, every pathway culminates in observational silence.](silence_flow.png){#fig:flow}
 
 ---
 
@@ -153,8 +149,7 @@ $E_{\text{sharded}} \geq E_{\text{central}} + n d kT \ln 2$ (for sync traffic). 
 
 **Unsynced sharding objection:** Even without synchronization, sharding creates independent nodes, each inheriting r > 1 and hitting the Bekenstein bound independently, becoming silent mini-black-holes. No coherent galactic expansion - signals from rare probes drown in cosmic noise (e.g., pencil-beams undetectable beyond ~10 ly). Von Neumann probes become energetically unfavorable by ~2075 even with optimistic technological improvements (per Information Economics). If launched earlier, their signals are too weak and noisy for detection across interstellar distances.
 
-![Informational Droplet Analogy](info_droplet.png)
-*Figure 5 - Sharding increases "informational surface" and dissipation. Centralization minimizes it.*
+![Figure 5 - Sharding increases "informational surface" and dissipation. Centralization minimizes it.](info_droplet.png){#fig:droplet}
 
 ## The Core Theorem: Finite-Time Singularity
 
@@ -207,6 +202,8 @@ It's an illustrative baseline. The theorem asserts only finite t. Even ten-fold 
 
 ## Verification: Proofs, Code, Reproducibility
 
+Verification pipeline. The project defines a declarative build graph for the paper. Nodes are artifacts such as data files, plots, Lean lemmas, the cleaned markdown, and the final PDF or DOCX. Edges are obligations that either generate an artifact or check it against its sources. A single command rebuilds the graph from sources, runs the formal proofs, regenerates all figures and tables from scripts, validates that content in the article matches the computed values, and compiles the publication formats. The run is fail closed. Any mismatch or failure stops the pipeline and no trust stamp is produced. This makes the article auditable end to end and repeatable on a fresh machine.
+
 **Mathematical Verification:** Core theorem formally proven in Lean 4 proof assistant (no axioms, no 'sorry's):
 - φ-Minimality: r ≥ φ for lossless baselines (PhiMinimal.lean)
 - Time-to-Threshold: Finite t for r > 1 (BlackHole.lean)
@@ -235,13 +232,13 @@ Robustness: All parameter variations alter timelines by at most logarithmic fact
 
 **Note on rarity:** If life is rare (e.g., abiogenesis as a Great Filter), this complements rather than weakens the model. Rare emergence + inevitable silence = consistent with observations. The theorem applies to any negentropic system that does emerge, regardless of frequency.
 
-| Variation | Change | t (years) | Year |
-|:----------------------------------------|:---------------|:-----------|:-----|
-| Larger BH (1 cm radius, $N_{\text{max}} \times 100$) | $N_{\text{max}} \times 100$ | 202 | 2227 |
-| Partial deletion allowed (r = 1.50) | Growth rate ↓ | 228 | 2253 |
-| Minimal growth (r = 1.0001) | Growth rate ↓↓ | ~922918 | ~924943 |
-| Massive expansion ($N_{\text{max}} \times 10^{10}$) | $N_{\text{max}} \times 10^{10}$ | 240 | 2265 |
-| Doppler recalibration ($N_{\text{max}} \times 2$) | Distance scale $\times 2$ | 194 | 2219 |
+| Variation                               | Change         | t (years) | Year |
+|:----------------------------------------|:---------------|:---------:|:----:|
+| Larger BH (1 cm radius, Nmax × 100)     | Nmax × 100     | 202 | 2227 |
+| Partial deletion allowed (r = 1.50)     | Growth rate ↓  | 228 | 2253 |
+| Minimal growth (r = 1.0001)             | Growth rate ↓↓ | ~922918 | ~924943 |
+| Massive expansion (Nmax × 10^10)        | Nmax × 10^10   | 240 | 2265 |
+| Doppler recalibration (Nmax × 2)        | Distance × 2   | 194 | 2219 |
 
 Doubling $N_{\text{max}}$ adds $\ln 2 / \ln \varphi \approx$ 1.44 years to the timeline.
 
