@@ -2,5 +2,4 @@ matplotlib==3.9.1
 numpy==2.0.1
 Pillow==10.4.0
 qutip==5.2.0
-veritas-framework>=0.2.0
 
